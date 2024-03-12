@@ -1,0 +1,43 @@
+﻿<Pipeline>
+
+  <Setup>
+    <RenderTarget id="GBUFFER" depthBuf="true" numColBufs="3" format="RGBA16F" scale="1.0" />
+  </Setup>
+
+  <CommandQueue>
+    <Stage id="Attribpass">
+      <SwitchTarget target="GBUFFER" />
+      <ClearTarget depthBuf="true" colBuf0="true" />
+      <DrawGeometry context="ATTRIBPASS" class="~Translucent" />
+    </Stage>
+
+    <Stage id="Lighting">
+      <SwitchTarget target="" />
+      <ClearTarget colBuf0="true" />
+      <BindBuffer texUnit="8" target="GBUFFER" bufIndex="0" />
+      <BindBuffer texUnit="9" target="GBUFFER" bufIndex="1" />
+      <BindBuffer texUnit="10" target="GBUFFER" bufIndex="2" />
+
+      <DrawQuad material="light.material.xml" context="AMBIENT" />
+      <DoDeferredLightLoop />
+    </Stage>
+
+    <Stage id="Overlays">
+      <DrawOverlays context="OVERLAY" />
+    </Stage>
+  </CommandQueue>
+
+
+  <Pipeline>
+    <RenderTarget id="Albedo" format="R8G8B8A8_UNorm" scale="1" />
+    <RenderTarget id="Normals" format="R16G16B16A16_SNorm" scale="1" />
+    <RenderTarget id="Depth" format="R8G8B8A8_UNorm" scale="1" />
+    <RenderTarget id="Data" format="R32_Float" scale="1" />
+    <RenderTarget id="Lighting" format="R16G16B16A16_Float" scale="1" />
+    <DepthTexture id="Shadow" format="R32_Typeless" size="4096" />
+
+  </Pipeline>
+  
+</Pipeline>
+
+

@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D1C8681C-6411-455D-9D05-725A25F7CFB2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Spark.Client</RootNamespace>
+    <AssemblyName>SparkEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.D3DCompiler.4.2.0\lib\net45\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Desktop.4.2.0\lib\net45\SharpDX.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11.Effects, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.Effects.4.2.0\lib\net45\SharpDX.Direct3D11.Effects.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.RawInput, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.RawInput.4.0.1\lib\net45\SharpDX.RawInput.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=15.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.15.1.1\lib\net47\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BorderlessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeConventions.cs" />
+    <Compile Include="Editor\Msg.cs" />
+    <Compile Include="Editor\TransformRotate.cs" />
+    <Compile Include="Editor\TransformScale.cs" />
+    <Compile Include="Editor\ToolBase.cs" />
+    <Compile Include="Editor\TerrainBrush.cs" />
+    <Compile Include="Editor\UI\BaseControls\TreeNodeEx.cs" />
+    <Compile Include="Editor\UI\Custom Inspectors\MeshInspector.cs" />
+    <Compile Include="Editor\UI\DockContent\ExplorerControl.cs" />
+    <Compile Include="Editor\UI\DockContent\ViewportControl.cs" />
+    <Compile Include="Editor\UI\DockContent\SettingsControl.cs" />
+    <Compile Include="Editor\UI\DockContent\AssetsControl.cs" />
+    <Compile Include="Editor\UI\BaseControls\SeachBox.cs" />
+    <Compile Include="Editor\UI\Custom Inspectors\ComponentInspector.cs" />
+    <Compile Include="Editor\UI\Custom Inspectors\MaterialInspector.cs" />
+    <Compile Include="Editor\UI\Extended\GenericInspector.cs" />
+    <Compile Include="Editor\UI\Extended\GUIInspectorAttribute.cs" />
+    <Compile Include="Editor\UI\Custom Inspectors\TextureInspector.cs" />
+    <Compile Include="Editor\UI\MenuBuilder.cs" />
+    <Compile Include="Editor\UI\PropertyControls\ValueSelectProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\PropertyControlAttribute.cs" />
+    <Compile Include="Editor\UI\Extended\GUIInspector.cs" />
+    <Compile Include="Editor\UI\Windows\AssetBrowser.cs" />
+    <Compile Include="ContentUtil.cs" />
+    <Compile Include="Editor\Editor.cs" />
+    <Compile Include="Editor\UI\EditorUI.cs" />
+    <Compile Include="Editor\UI\Graph\GraphEditor.cs" />
+    <Compile Include="Game\NPCController.cs" />
+    <Compile Include="Editor\UI\Docking\DockIndicator.cs" />
+    <Compile Include="Editor\UI\Docking\DockRegion.cs" />
+    <Compile Include="Editor\UI\Docking\DockGroup.cs" />
+    <Compile Include="Editor\UI\Extended\GUIObject.cs" />
+    <Compile Include="Editor\UI\PropertyControls\DoubleProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\IntProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\QuaternionProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\FloatProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\StringProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\AssetProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\Vector2Property.cs" />
+    <Compile Include="Editor\UI\PropertyControls\DoubleSliderProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\BoolProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\EnumProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\LabelProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\Vector3Property.cs" />
+    <Compile Include="Editor\UI\PropertyControls\ColorProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\IntSliderProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\FloatSliderProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\TextureProperty.cs" />
+    <Compile Include="Editor\UI\PropertyControls\ListProperty.cs" />
+    <Compile Include="IMGUI\Windows\AnimationControllerWindow.cs" />
+    <Compile Include="IMGUI\Windows\SceneViewWindow.cs" />
+    <Compile Include="IMGUI\Windows\EditorConsoleWindow.cs" />
+    <Compile Include="IMGUI\Windows\ProjectWindow.cs" />
+    <Compile Include="IMGUI\Windows\HierarchyWindow.cs" />
+    <Compile Include="IMGUI\EditorIMGUI.cs" />
+    <Compile Include="GUI\GuiActions.cs" />
+    <Compile Include="Game\CharacterController.cs" />
+    <Compile Include="Editor\EditorCamera.cs" />
+    <Compile Include="Game\PhysicsVicinity.cs" />
+    <Compile Include="RuntimeCompile.cs" />
+    <Compile Include="Scenes\AnimTest.cs" />
+    <Compile Include="IMGUI\IMGUIRenderer.cs" />
+    <Compile Include="IMGUI\IMGUI.cs" />
+    <Compile Include="IMGUI\Windows\DebugWindow.cs" />
+    <Compile Include="IMGUI\Windows\InspectorWindow.cs" />
+    <Compile Include="Editor\EditorTestScene.cs" />
+    <Compile Include="Editor\UI\DockContent\DebugControl.cs" />
+    <Compile Include="Editor\UI\PropertyControls\PropertyFrame.cs" />
+    <Compile Include="Editor\UI\BaseControls\ScrollPanel.cs" />
+    <Compile Include="Game\GameTestScene.cs" />
+    <Compile Include="Game\GameUI.cs" />
+    <Compile Include="Game\Game.cs" />
+    <Compile Include="Editor\UI\PropertyControls\PropertyControl.cs" />
+    <Compile Include="Editor\UI\Windows\MessageBox.cs" />
+    <Compile Include="Editor\UI\DockContent\InspectorControl.cs" />
+    <Compile Include="Editor\UI\Windows\NoiseEditor.cs" />
+    <Compile Include="Editor\EditorTools.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GUI\MMOGui.cs" />
+    <Compile Include="Editor\Selector.cs" />
+    <Compile Include="Game\UAVTest.cs" />
+    <Compile Include="Game\WowCamera.cs" />
+    <Compile Include="Editor\TransformTranslate.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Editor\UI\EditorDesktop.cs" />
+    <Compile Include="Editor\UI\BaseControls\GuiWindow.cs" />
+    <Compile Include="GUI\SquidRenderer.cs" />
+    <Compile Include="Story\ArtifactStory.cs" />
+    <Compile Include="Story\PlanetStory.cs" />
+    <Compile Include="Story\RaceStory.cs" />
+    <Compile Include="Story\StoryGenerator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spark\Spark.csproj">
+      <Project>{3746B79C-4BE3-41A4-8113-249CE7A6FA77}</Project>
+      <Name>Spark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Projects\2019\SQUID\Squid.Core\Squid.Core.csproj">
+      <Project>{631ee234-c3da-4332-b9d0-258cd01ea2da}</Project>
+      <Name>Squid.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>del $(TargetPath)</PreBuildEvent>
+  </PropertyGroup>
+</Project>

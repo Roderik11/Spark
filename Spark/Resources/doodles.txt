@@ -1,0 +1,265 @@
+﻿#include "common"
+#define Near  4096.0f //64 * 64
+#define Far  6400.0f //80 * 80
+#define OneOverMapsize  0.00024408103f //1.0f / 4097.0f
+
+cbuffer scene
+{
+	float LogZ;
+	float4x4 View;
+	float4x4 Projection;
+	float3 CameraPosition;
+}
+
+cbuffer object
+{
+	float4x4 World;
+	float Time;
+}
+
+Texture2D Textures[4];
+SamplerState sampData;
+SamplerState sampHeight;
+float MaxHeight;
+
+//static const float Near = 4096.0f; //64 * 64
+//static const float Far = 6400.0f; //80 * 80
+//static const float OneOverMapsize = 0.00024408103f; //1.0f / 4097.0f
+
+//Vertex Input Structure
+struct VS_INPUT
+{
+	float3 Position		: POSITION;
+	float3 Size			: SIZE;
+	float4 Color		: COLOR;
+};
+
+struct VS_OUTPUT
+{
+	float4 Position		: POSITION;
+	float4 Size			: SIZE;
+	float4 Color		: COLOR;
+	float3 Normal		: NORMAL;
+};
+
+struct GS_OUTPUT
+{
+	float4 Position		: SV_POSITION;
+	float3 Normal		: NORMAL;
+	float2 UV			: TEXCOORD0;
+	float4 Color		: COLOR;
+};
+
+//Pixel Output Structure
+struct PS_OUTPUT
+{
+	float4 Albedo		: SV_TARGET0;
+	float4 Normals		: SV_TARGET1;
+	float3 Depth		: SV_TARGET2;
+	float4 Data			: SV_TARGET3;
+	float fDepth : SV_DEPTH;
+};
+
+float3 GetNormal(Texture2D tex, float2 uv)
+{
+	float texelSize = OneOverMapsize;// 1.0f / 4097.0f; //size of one texel
+
+	float4 h;
+	h[0] = tex.SampleLevel(sampHeight, uv + float2(0, -texelSize), 0).r;
+	h[1] = tex.SampleLevel(sampHeight, uv + float2(-texelSize, 0), 0).r;
+	h[2] = tex.SampleLevel(sampHeight, uv + float2(texelSize, 0), 0).r;
+	h[3] = tex.SampleLevel(sampHeight, uv + float2(0, texelSize), 0).r;
+
+	float3 n;
+	n.z = h[0] - h[3];
+	n.x = h[1] - h[2];
+	n.y = 0.005f;
+
+	return normalize(n);
+}
+
+float GetSteepness(Texture2D tex, float2 uv)
+{
+	float texelSize = OneOverMapsize;// 1.0f / 4097.0f; //size of one texel
+	
+	float height = tex.SampleLevel(sampHeight, uv, 0).r;
+
+	// Compute the differentials by stepping over 1 in both directions.
+	float dx = tex.SampleLevel(sampHeight, uv + float2(texelSize, 0), 0).r - height;
+	float dy = tex.SampleLevel(sampHeight, uv + float2(0, texelSize), 0).r - height;
+
+	// The "steepness" is the magnitude of the gradient vector
+	// For a faster but not as accurate computation, you can just use abs(dx) + abs(dy)
+	return sqrt(dx * dx + dy * dy);
+}
+
+//Vertex Shader
+VS_OUTPUT VS(VS_INPUT input)
+{
+	VS_OUTPUT output;
+
+	float4 worldPosition = mul(float4(input.Position, 1), World);
+	float2 uv = ((worldPosition.xz + 4097.0f) * 0.5f) * OneOverMapsize;// / 4097.0f;
+
+	float3 normal = GetNormal(Textures[3], uv);
+	float angle = dot(normal, float3(0, 1, 0));
+	//float slope = GetSteepness(Textures[3], uv);
+
+	float limit = 0.66f;
+	float grow = map(angle, limit, 1, 0, 1);
+
+	grow = clamp(grow * 10, 0, 1);
+	//grow = grow * grow;
+
+	//if (grow < 0.001f)
+	//	return;
+
+	float2 diff = worldPosition.xz - CameraPosition.xz;
+	float distance = dot(diff, diff);
+
+	float elevation = Textures[3].SampleLevel(sampHeight, uv, 0).r;
+	float l = map(elevation, 8.5f / 512.0f, 10.5f / 512.0f, 0, 1);
+
+	grow *= map(distance, Near, Far, 1, 0);
+	grow *= l;
+
+	worldPosition.y = elevation * MaxHeight;
+
+	output.Position = grow > .1f ? worldPosition : worldPosition / 0;
+	output.Size = float4(input.Size, grow);
+	output.Color = input.Color;
+	output.Normal = normal;
+	return output;
+	
+	//return input;
+}
+
+//--------------------------------------------------------------------------------------
+// GEOMETRY SHADER for Quads
+//--------------------------------------------------------------------------------------
+[maxvertexcount(4)]
+void GS_Quad(point VS_OUTPUT vert[1], inout TriangleStream<GS_OUTPUT> triStream)
+{
+	VS_OUTPUT input = vert[0];
+
+	//float4 worldPosition = mul(float4(input.Position, 1), World);
+	//float2 uv = ((worldPosition.xz + 4097.0f) * 0.5f) * OneOverMapsize;// / 4097.0f;
+
+	//float3 normal = GetNormal(Textures[3], uv);
+	//float angle = dot(normal, float3(0, 1, 0));
+	////float slope = GetSteepness(Textures[3], uv);
+
+	//float limit = 0.66f;
+	//float grow = map(angle, limit, 1, 0, 1);
+
+	//grow = clamp(grow * 10, 0, 1);
+	////grow = grow * grow;
+
+	//if (grow < 0.001f)
+	//	return;
+
+	//float2 diff = worldPosition.xz - CameraPosition.xz;
+	//float distance = dot(diff, diff);
+
+	//float elevation = Textures[3].SampleLevel(sampHeight, uv, 0).r;
+	//float l = map(elevation, 8.5f / 512.0f, 10.5f / 512.0f, 0, 1);
+
+	//grow *= map(distance, Near, Far, 1, 0);
+	//grow *= l;
+	//
+	//if (grow > 0.1f)
+	//{
+		GS_OUTPUT v;
+
+	//	worldPosition.y = elevation * MaxHeight;
+		float3 normal = input.Normal;
+		float4 worldPosition = input.Position;
+		float grow = input.Size.w;
+
+		float2 gridpos = float2(input.Size.z % 2, floor(input.Size.z / 2));
+		float2 uv = (1.0 / 2) * gridpos;// +(1.0 / 2);
+		float4 viewPosition = mul(worldPosition, View);
+		float4 pos = mul(viewPosition, Projection);
+
+		float width = vert[0].Size.x * (grow);
+		float height = vert[0].Size.y * (grow);
+		float halfwidth = width / 2;
+
+		float sway = sin(pos.x + Time * 2) * halfwidth * 0.125f;
+		float sway2 = cos(pos.z + Time * 2) * halfwidth * 0.125f;
+
+		//normal.y = clamp(normal.y - sway, -1, 1);
+
+		//--------------------------------------------
+		//quad
+		//bottom left
+		v.Position = pos + float4(-halfwidth, 0, 0, 0);
+		v.UV = uv + float2(0, 1) / 2;
+		v.Normal = normal;
+		v.Color = input.Color;
+		triStream.Append(v);
+
+		//top left
+		v.Position = pos + float4(-halfwidth + sway, height, sway2, sway2);
+		v.UV = uv + float2(0, 0);
+		v.Normal = normal;
+		v.Color = input.Color;
+		triStream.Append(v);
+
+		//bottom right
+		v.Position = pos + float4(halfwidth, 0, 0, 0);
+		v.UV = uv + float2(1, 1) / 2;
+		v.Normal = normal;
+		v.Color = input.Color;
+		triStream.Append(v);
+
+		//top right
+		v.Position = pos + float4(halfwidth + sway, height, sway2, sway2);
+		v.UV = uv + float2(1, 0) / 2;
+		v.Normal = normal;
+		v.Color = input.Color;
+		triStream.Append(v);
+	//}
+}
+
+//Pixel Shader
+PS_OUTPUT PS(GS_OUTPUT input)
+{
+	PS_OUTPUT output;
+
+	half4 vDiffuseMap = Textures[0].Sample(sampData, input.UV);
+
+	clip(vDiffuseMap.a - 0.6f);
+
+	half4 vNormalMap = Textures[1].Sample(sampData, input.UV);
+	half4 vDataMap = Textures[2].Sample(sampData, input.UV);
+
+	//float3 vNormal = normalize(mul(vNormalMap.xyz * 2 - 1, input.TBN));
+	//float3 vNormal = mul(vNormalMap, (float3x3)View);
+
+	float factor = 1;
+	float3 norm = input.Normal;
+	norm.xz *= factor;
+	norm = normalize(norm);
+
+	float3 vNormal = mul(norm, (float3x3)View);
+														   
+	// output.Albedo = float4(output.Depth.xyz, 1);
+	output.Albedo = float4(vDiffuseMap.rgb * input.Color.rgb, vDiffuseMap.a);
+	output.Normals = float4(vNormal.xyz, 1);// vNormalMap.a);
+	output.Data = float4(vDataMap.r, vDataMap.g, vDataMap.b, vDataMap.a);
+	output.Depth = log2(1 + input.Position.w) * LogZ;
+	output.fDepth = output.Depth;
+
+	return output;
+}
+
+technique11 T0
+{
+	pass P0
+	{
+		SetVertexShader(CompileShader(vs_4_0, VS()));
+		SetGeometryShader(CompileShader(gs_4_0, GS_Quad()));
+		SetPixelShader(CompileShader(ps_4_0, PS()));
+	}
+}

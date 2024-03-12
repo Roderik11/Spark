@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3746B79C-4BE3-41A4-8113-249CE7A6FA77}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Spark</RootNamespace>
+    <AssemblyName>Spark</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PROFILER</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AssimpNet, Version=5.0.0.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6, processorArchitecture=MSIL">
+      <HintPath>..\packages\AssimpNet.5.0.0-beta1\lib\net40\AssimpNet.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.D3DCompiler.4.2.0\lib\net45\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11.Effects, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.Effects.4.2.0\lib\net45\SharpDX.Direct3D11.Effects.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.RawInput, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.RawInput.4.0.1\lib\net45\SharpDX.RawInput.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Animation\AnimationCurve.cs" />
+    <Compile Include="Animation\AnimationMask.cs" />
+    <Compile Include="Assets\Importers\AnimationClipReader.cs" />
+    <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\AnimationBlendTree.cs" />
+    <Compile Include="Animation\AnimationLayer.cs" />
+    <Compile Include="Animation\AnimationChannel.cs" />
+    <Compile Include="Animation\AnimationClip.cs" />
+    <Compile Include="Animation\AnimationState.cs" />
+    <Compile Include="Animation\AnimationTransition.cs" />
+    <Compile Include="Animation\Bone.cs" />
+    <Compile Include="Animation\QuaternionKey.cs" />
+    <Compile Include="Animation\VectorKey.cs" />
+    <Compile Include="Assets\IAsset.cs" />
+    <Compile Include="Assets\LODGroup.cs" />
+    <Compile Include="Assets\Mesh.Grid.cs" />
+    <Compile Include="Assets\Importers\MaterialReader.cs" />
+    <Compile Include="Assets\Importers\EffectReader.cs" />
+    <Compile Include="Assets\StaticMesh.cs" />
+    <Compile Include="Base\Attributes.cs" />
+    <Compile Include="Base\Component.cs" />
+    <Compile Include="Base\Entity.cs" />
+    <Compile Include="Utils\DDSTextureLoader.cs" />
+    <Compile Include="Components\AudioSource.cs" />
+    <Compile Include="Components\AudioListener.cs" />
+    <Compile Include="Components\Volume.cs" />
+    <Compile Include="Components\Spline.cs" />
+    <Compile Include="Components\StaticMeshRenderer.cs" />
+    <Compile Include="Experimental\EntitySet.cs" />
+    <Compile Include="Graph\Nodes\PCG.cs" />
+    <Compile Include="Graph\Attributes.cs" />
+    <Compile Include="Graph\Connection.cs" />
+    <Compile Include="Graph\Node.cs" />
+    <Compile Include="Graph\NodeGraph.cs" />
+    <Compile Include="Graph\Port.cs" />
+    <Compile Include="Utils\MultiList.cs" />
+    <Compile Include="Noise\Generator\Billow.cs" />
+    <Compile Include="Noise\Generator\Checker.cs" />
+    <Compile Include="Noise\Generator\Const.cs" />
+    <Compile Include="Noise\Generator\Cylinders.cs" />
+    <Compile Include="Noise\Generator\Perlin.cs" />
+    <Compile Include="Noise\Generator\RiggedMultifractal.cs" />
+    <Compile Include="Noise\Generator\Spheres.cs" />
+    <Compile Include="Noise\Generator\Voronoi.cs" />
+    <Compile Include="Noise\Gradient.cs" />
+    <Compile Include="Noise\MathHelper.cs" />
+    <Compile Include="Noise\ModuleBase.cs" />
+    <Compile Include="Noise\Noise2D.cs" />
+    <Compile Include="Noise\Noise3D.cs" />
+    <Compile Include="Noise\Operator\Abs.cs" />
+    <Compile Include="Noise\Operator\Add.cs" />
+    <Compile Include="Noise\Operator\Blend.cs" />
+    <Compile Include="Noise\Operator\Cache.cs" />
+    <Compile Include="Noise\Operator\Clamp.cs" />
+    <Compile Include="Noise\Operator\Curve.cs" />
+    <Compile Include="Noise\Operator\Displace.cs" />
+    <Compile Include="Noise\Operator\Exponent.cs" />
+    <Compile Include="Noise\Operator\Invert.cs" />
+    <Compile Include="Noise\Operator\Max.cs" />
+    <Compile Include="Noise\Operator\Min.cs" />
+    <Compile Include="Noise\Operator\Multiply.cs" />
+    <Compile Include="Noise\Operator\Power.cs" />
+    <Compile Include="Noise\Operator\Rotate.cs" />
+    <Compile Include="Noise\Operator\Scale.cs" />
+    <Compile Include="Noise\Operator\ScaleBias.cs" />
+    <Compile Include="Noise\Operator\Select.cs" />
+    <Compile Include="Noise\Operator\Subtract.cs" />
+    <Compile Include="Noise\Operator\Terrace.cs" />
+    <Compile Include="Noise\Operator\Translate.cs" />
+    <Compile Include="Noise\Operator\Turbulence.cs" />
+    <Compile Include="Noise\NoiseUtils.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\AssetDatabase.cs" />
+    <Compile Include="Shaders\ComputeShader.cs" />
+    <Compile Include="Utils\BitSet.cs" />
+    <Compile Include="Utils\ColladaUtil.cs" />
+    <Compile Include="Components\Collider.cs" />
+    <Compile Include="Components\LODMeshRenderer.cs" />
+    <Compile Include="Components\RigidBody.cs" />
+    <Compile Include="Base\RenderPipeline.cs" />
+    <Compile Include="Base\CommandBuffer.cs" />
+    <Compile Include="Components\RigidBody2.cs" />
+    <Compile Include="Components\Terrain.cs" />
+    <Compile Include="Utils\Graphics.cs" />
+    <Compile Include="Experimental\IKTest.cs" />
+    <Compile Include="Components\NetComponent.cs" />
+    <Compile Include="Systems\MeshRenderSystem.cs" />
+    <Compile Include="Utils\Parallel.cs" />
+    <Compile Include="Utils\Pool.cs" />
+    <Compile Include="Utils\Debug.cs" />
+    <Compile Include="Experimental\EntitySystem.cs" />
+    <Compile Include="Utils\JitterDebugDraw.cs" />
+    <Compile Include="Jitter\Collision\CollisionIsland.cs" />
+    <Compile Include="Jitter\Collision\CollisionSystem.cs" />
+    <Compile Include="Jitter\Collision\CollisionSystemBrute.cs" />
+    <Compile Include="Jitter\Collision\CollisionSystemPersistentSAP.cs" />
+    <Compile Include="Jitter\Collision\CollisionSystemSAP.cs" />
+    <Compile Include="Jitter\Collision\DynamicTree.cs" />
+    <Compile Include="Jitter\Collision\GJKCollide.cs" />
+    <Compile Include="Jitter\Collision\IslandManager.cs" />
+    <Compile Include="Jitter\Collision\Octree.cs" />
+    <Compile Include="Jitter\Collision\Shapes\BoxShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\CapsuleShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\CompoundShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\ConeShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\ConvexHullShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\CylinderShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\MinkowskiSumShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\Multishape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\Shape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\SphereShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\TerrainShape.cs" />
+    <Compile Include="Jitter\Collision\Shapes\TriangleMeshShape.cs" />
+    <Compile Include="Jitter\Collision\XenoCollide.cs" />
+    <Compile Include="Jitter\DataStructures\Action.cs" />
+    <Compile Include="Jitter\DataStructures\Hashset.cs" />
+    <Compile Include="Jitter\DataStructures\ReadOnlyHashset.cs" />
+    <Compile Include="Jitter\Dynamics\Arbiter.cs" />
+    <Compile Include="Jitter\Dynamics\ArbiterMap.cs" />
+    <Compile Include="Jitter\Dynamics\Constraint.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\FixedAngle.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\PointOnLine.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\PointOnPoint.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\PointPointDistance.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\SingleBody\FixedAngle.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\SingleBody\PointOnLine.cs" />
+    <Compile Include="Jitter\Dynamics\Constraints\SingleBody\PointOnPoint.cs" />
+    <Compile Include="Jitter\Dynamics\Contact.cs" />
+    <Compile Include="Jitter\Dynamics\Joints\HingeJoint.cs" />
+    <Compile Include="Jitter\Dynamics\Joints\Joint.cs" />
+    <Compile Include="Jitter\Dynamics\Joints\LimitedHingeJoint.cs" />
+    <Compile Include="Jitter\Dynamics\Joints\PrismaticJoint.cs" />
+    <Compile Include="Jitter\Dynamics\Material.cs" />
+    <Compile Include="Jitter\Dynamics\RigidBody.cs" />
+    <Compile Include="Jitter\Dynamics\SoftBody.cs" />
+    <Compile Include="Jitter\IDebugDraw.cs" />
+    <Compile Include="Jitter\LinearMath\JBBox.cs" />
+    <Compile Include="Jitter\LinearMath\JConvexHull.cs" />
+    <Compile Include="Jitter\LinearMath\JMath.cs" />
+    <Compile Include="Jitter\LinearMath\JMatrix.cs" />
+    <Compile Include="Jitter\LinearMath\JQuaternion.cs" />
+    <Compile Include="Jitter\LinearMath\JVector.cs" />
+    <Compile Include="Jitter\ResourcePool.cs" />
+    <Compile Include="Jitter\ThreadManager.cs" />
+    <Compile Include="Jitter\World.cs" />
+    <Compile Include="Base\Physics.cs" />
+    <Compile Include="Utils\JSON.cs" />
+    <Compile Include="Utils\MessageDispatcher.cs" />
+    <Compile Include="Experimental\PipelineDescriptor.cs" />
+    <Compile Include="Shaders\backup\StructBuffer.cs" />
+    <Compile Include="Shaders\EffectParameter.cs" />
+    <Compile Include="Base\Time.cs" />
+    <Compile Include="Utils\Profiler.cs" />
+    <Compile Include="Utils\QuadTreeNode.cs" />
+    <Compile Include="Structs\OrientedBoundingBox.cs" />
+    <Compile Include="Components\Terrain2.cs" />
+    <Compile Include="Components\TerrainDecorator.cs" />
+    <Compile Include="Utils\RectanglePacker.cs" />
+    <Compile Include="Utils\RNG.cs" />
+    <Compile Include="Utils\Terminal.cs" />
+    <Compile Include="Utils\Observable.cs" />
+    <Compile Include="Components\Camera.cs" />
+    <Compile Include="Utils\DeferredRenderer.cs" />
+    <Compile Include="Reflection\Field.cs" />
+    <Compile Include="Reflection\Mapping.cs" />
+    <Compile Include="Reflection\Reflector.cs" />
+    <Compile Include="Base\Space.cs" />
+    <Compile Include="Shaders\backup\Shader_bak.cs" />
+    <Compile Include="Utils\Extensions.cs" />
+    <Compile Include="Utils\Geometry.cs" />
+    <Compile Include="Utils\MathHelper.cs" />
+    <Compile Include="Assets\Mesh.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Components\Transform.cs" />
+    <Compile Include="Structs\Vertex.cs" />
+    <Compile Include="Utils\ValueProviders.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Shaders\Effect.cs" />
+    <Compile Include="Shaders\backup\Effect_bak.cs" />
+    <Compile Include="Shaders\backup\MaterialFactory.cs" />
+    <Compile Include="Shaders\Material.cs" />
+    <Compile Include="Assets\RenderTexture2D.cs" />
+    <Compile Include="Utils\IcoFrustumQuery.cs" />
+    <Compile Include="Utils\LineBatch.cs" />
+    <Compile Include="Utils\Icoseptree.cs" />
+    <Compile Include="Components\Animator.cs" />
+    <Compile Include="Components\PointLight.cs" />
+    <Compile Include="Components\MeshRenderer.cs" />
+    <Compile Include="Components\SpotLight.cs" />
+    <Compile Include="Components\SkyboxRenderer.cs" />
+    <Compile Include="Interfaces\IPreloadable.cs" />
+    <Compile Include="Assets\AssetManager.cs" />
+    <Compile Include="Assets\Importers\MeshReader.cs" />
+    <Compile Include="Assets\Texture.cs" />
+    <Compile Include="Assets\Importers\TextureReader.cs" />
+    <Compile Include="Utils\DataSerializer.cs" />
+    <Compile Include="Utils\Disposer.cs" />
+    <Compile Include="Base\Engine.cs" />
+    <Compile Include="Utils\NativeMethods.cs" />
+    <Compile Include="Base\RenderView.cs" />
+    <Compile Include="Shaders\States.cs" />
+    <Compile Include="Utils\ObjectGraph.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Assets\Prototype.cs" />
+    <Compile Include="Structs\Frustum.cs" />
+    <Compile Include="Components\DirectionalLight.cs" />
+    <Compile Include="Utils\StructuredBuffer.cs" />
+    <Compile Include="Components\ParticleSystem.cs" />
+    <Compile Include="Shaders\Samplers.cs" />
+    <Compile Include="Shaders\ShaderInclude.cs" />
+    <Compile Include="Utils\Font.cs" />
+    <Compile Include="Base\Input.cs" />
+    <Compile Include="Shaders\backup\ConstantBufferBox.cs" />
+    <Compile Include="Assets\Mesh.Shapes.cs" />
+    <Compile Include="Shaders\backup\ShaderParameters.cs" />
+    <Compile Include="Utils\SpriteBatch.cs" />
+    <Compile Include="Utils\WindowsMessages.cs" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\cleargbuffer.fx" />
+    <None Include="Resources\common.fx" />
+    <None Include="Resources\composition.fx" />
+    <None Include="Resources\mesh_opaque.fx" />
+    <None Include="Resources\particles.fx" />
+    <None Include="Resources\linebatch.fx" />
+    <None Include="Resources\cubemap_reflection.fx" />
+    <None Include="Resources\lighting.fx" />
+    <None Include="Resources\light_directional.fx" />
+    <None Include="Resources\light_point.fx" />
+    <None Include="Resources\mesh_skybox.fx" />
+    <None Include="Resources\spritebatch.fx" />
+    <None Include="Resources\terrain.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Experimental\DeferredPipeline.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Jitter\ToDo.txt" />
+    <Content Include="Resources\doodles.txt" />
+    <None Include="Resources\mesh_forward.fx" />
+    <None Include="Resources\water.fx" />
+    <Content Include="Experimental\XMLFile1.xml" />
+    <None Include="Resources\createNormals.fx" />
+    <None Include="Resources\tree.fx" />
+    <None Include="Resources\sculpt.fx" />
+    <None Include="Resources\mesh_unlit.fx" />
+    <None Include="Resources\blit.fx" />
+    <None Include="Resources\ssao.fx" />
+    <None Include="Resources\mesh_grass.fx" />
+    <None Include="Resources\simplexNoise.hlsl" />
+    <None Include="Resources\terrain2.fx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AssimpNet.5.0.0-beta1\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.5.0.0-beta1\build\AssimpNet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AssimpNet.5.0.0-beta1\build\AssimpNet.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AssimpNet.5.0.0-beta1\build\AssimpNet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

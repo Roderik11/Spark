@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C2A349F4-4B1D-4127-AA33-FAC82A788BCA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Spark.Editor</RootNamespace>
+    <AssemblyName>Spark.Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>Spark.Editor.Program</StartupObject>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>Resources\LOD.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.RawInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.RawInput.4.2.0\lib\net45\SharpDX.RawInput.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ControlPool.cs" />
+    <Compile Include="Controls\PropertyGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PropertyGrid.Designer.cs">
+      <DependentUpon>PropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JointPick.cs" />
+    <Compile Include="Selector.cs" />
+    <Compile Include="TableLayout.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Util\EditorCamera.cs" />
+    <Compile Include="App\Options.cs" />
+    <Compile Include="EditorScene.cs" />
+    <Compile Include="Util\KeyMapper.cs" />
+    <Compile Include="Controls\Main\FormError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\FormError.Designer.cs">
+      <DependentUpon>FormError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\FileMonitor.cs" />
+    <Compile Include="Controls\Main\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Editor.cs" />
+    <Compile Include="Controls\Main\Prompt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\Prompt.designer.cs">
+      <DependentUpon>Prompt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\OutputWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\OutputWindow.Designer.cs">
+      <DependentUpon>OutputWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\LaunchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\LaunchForm.designer.cs">
+      <DependentUpon>LaunchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\EditorIcons.cs" />
+    <Compile Include="Controls\Main\Inspector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\Inspector.Designer.cs">
+      <DependentUpon>Inspector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\EditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="App\EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="App\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\Main\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App\EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\Prompt.resx">
+      <DependentUpon>Prompt.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\Inspector.resx">
+      <DependentUpon>Inspector.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\OutputWindow.resx">
+      <DependentUpon>OutputWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\LaunchForm.resx">
+      <DependentUpon>LaunchForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\FormError.resx">
+      <DependentUpon>FormError.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\ResourceBrowser.resx">
+      <DependentUpon>ResourceBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\SceneExplorer.resx">
+      <DependentUpon>SceneExplorer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Main\Viewport.resx">
+      <DependentUpon>Viewport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Controls\Main\ResourceBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\ResourceBrowser.Designer.cs">
+      <DependentUpon>ResourceBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\SceneExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\SceneExplorer.Designer.cs">
+      <DependentUpon>SceneExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Main\Viewport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Main\Viewport.Designer.cs">
+      <DependentUpon>Viewport.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\PropertyGrid.resx">
+      <DependentUpon>PropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\control_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\control_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\control_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\CSCodefile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\dotted_end.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\dotted_horizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\dotted_leaf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\dotted_vertical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Folder_closed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\Folder_open.png" />
+    <None Include="Resources\Meshes\transformer_rotate.obj" />
+    <None Include="Resources\Meshes\transformer_scale.obj" />
+    <None Include="Resources\Meshes\transformer_translate.obj" />
+    <None Include="Resources\Meshes\unitcube.tvm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\genericpic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\cube2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\cube.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\rotate.dds" />
+    <None Include="Resources\Images\scale.dds" />
+    <None Include="Resources\Images\splash.jpg" />
+    <None Include="Resources\Images\translate.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images\guistyle.dds" />
+    <None Include="Resources\Images\snap.dds" />
+    <None Include="Resources\Sculpting\terrain_sculptor_circle_soft_01.dds" />
+    <None Include="Resources\Sculpting\terrain_sculptor_square_hard_01.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\cog_edit.png" />
+    <Content Include="Resources\Images\eye.png" />
+    <Content Include="Resources\Images\find.png" />
+    <Content Include="Resources\Images\lock.png" />
+    <Content Include="Resources\LOD.ico" />
+    <Content Include="Resources\guistyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Spark.Windows\Spark.Windows.csproj">
+      <Project>{EEF1F1F8-6FAD-4719-9B77-CC193A11E0B0}</Project>
+      <Name>Spark.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spark\Spark.csproj">
+      <Project>{3746b79c-4be3-41a4-8113-249ce7a6fa77}</Project>
+      <Name>Spark</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

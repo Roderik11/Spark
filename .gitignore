@@ -1,0 +1,15 @@
+
+.vs/config/applicationhost.config
+/.vs
+/packages
+/Spark.Client/.vs
+/Spark/obj
+/Spark.Client/build
+/Spark.Client/obj
+/Spark.Editor/obj
+/Spark.Noise/bin
+/Spark.Noise/obj
+/Spark.Windows/.vs
+/Spark.Windows/obj
+/Spark.WPF/obj
+/Spark/build

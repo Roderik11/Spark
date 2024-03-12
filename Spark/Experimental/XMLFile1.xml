@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Shader Path="Shaders/Standard">
+	<Properties>
+		<Property Name="string"/>
+		<Property Name="string"/>
+	</Properties>
+	
+	<SubShader Name="Standard">
+		<Pass RenderPass="Opaque">
+			<Cull>Back</Cull>
+			<Blend>None</Blend>
+			<ZTest>Greater</ZTest>
+			<Vertex>string</Vertex>
+			<Geometry>string</Geometry>
+			<Fragment>string</Fragment>
+		</Pass>
+		<Pass RenderPass="Shadow">
+			<Cull>Front</Cull>
+			<Blend>None</Blend>
+			<ZTest>Greater</ZTest>
+			<Vertex>string</Vertex>
+			<Fragment>string</Fragment>
+		</Pass>
+	</SubShader>
+	
+	<SubShader Name="Instanced">
+		<Pass RenderPass="Opaque">
+			<Cull>Back</Cull>
+			<Blend>None</Blend>
+			<ZTest>Greater</ZTest>
+			<Vertex>string</Vertex>
+			<Geometry>string</Geometry>
+			<Fragment>string</Fragment>
+		</Pass>
+		<Pass RenderPass="Shadow">
+			<Cull>Front</Cull>
+			<Blend>None</Blend>
+			<ZTest>Greater</ZTest>
+			<Vertex>string</Vertex>
+			<Fragment>string</Fragment>
+		</Pass>
+	</SubShader>
+	
+</Shader>

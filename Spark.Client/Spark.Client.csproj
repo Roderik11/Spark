@@ -140,7 +140,6 @@
     <Compile Include="IMGUI\Windows\InspectorWindow.cs" />
     <Compile Include="GameTestScene.cs" />
     <Compile Include="Scripts\GameUI.cs" />
-    <Compile Include="Game.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\MMOGui.cs" />

@@ -129,6 +129,7 @@
   <ItemGroup>
     <Compile Include="Animation\AnimationCurve.cs" />
     <Compile Include="Animation\AnimationMask.cs" />
+    <Compile Include="AssetInfo.cs" />
     <Compile Include="Assets\Importers\AnimationClipReader.cs" />
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\AnimationBlendTree.cs" />

@@ -32,7 +32,7 @@ namespace Spark.Client
             Form.Show();
 
             Reflector.RegisterAssemblies(System.Reflection.Assembly.GetAssembly(typeof(Game)));
-            Engine.Initialize("..\\..\\..\\ProjectXYZ\\", false);
+            Engine.Initialize("D:\\Projects\\2024\\ProjectXYZ\\", false);
 
             View = new RenderView(Form.Handle)
             {

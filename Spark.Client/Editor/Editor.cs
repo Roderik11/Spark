@@ -52,7 +52,7 @@ namespace Spark.Client
             Thread.Sleep(1000);
 
             Reflector.RegisterAssemblies(System.Reflection.Assembly.GetAssembly(typeof(EditorApp)));
-            Engine.Initialize("..\\..\\..\\ProjectXYZ\\", true);
+            Engine.Initialize("D:\\Projects\\2024\\ProjectXYZ\\", true);
 
             viewport = new RenderView(Form.Handle)
             {

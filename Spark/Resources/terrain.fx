@@ -227,20 +227,22 @@ FragmentOutput PS(VertexOutput input)
 	
     for (int i = 0; i < 4; ++i)
     {
-		int layer = i * 4;
+		int startIndex = i * 4;
 		
 		float4 weights = ControlMaps.Sample(sampData, float3(uv, i));
 
 		for (int j = 0; j < 4; ++j)
         {
-            float2 tiling = 1700 / LayerTiling[layer + j];
+            int layer = startIndex + j;
+            float2 tiling = 1700 / LayerTiling[layer];
 			
             if (weights[j] <= 0)
                 continue;
 
             float2 texuv = uv * tiling;
-			float4 c = DiffuseMaps.Sample(sampData, float3(texuv, layer + j));
-            float4 n = NormalMaps.Sample(sampData, float3(texuv, layer + j));
+			float4 c = DiffuseMaps.Sample(sampData, float3(texuv, layer));
+            float4 n = NormalMaps.Sample(sampData, float3(texuv, layer));
+			
             color += c * weights[j];
             normal += n * weights[j];
         }

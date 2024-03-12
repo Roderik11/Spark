@@ -16,8 +16,8 @@ namespace Spark.Client
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-            //var app = new Game();
-            var app = new EditorApp();
+            var app = new Game();
+            //var app = new EditorApp();
             app.Run();
         }
     }

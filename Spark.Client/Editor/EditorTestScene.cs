@@ -55,7 +55,7 @@ namespace Spark.Client
                     Normals =  content.Load<Texture>("Terrain/Terrain Textures/Sandstone/Sandstone_Nor.png"),
                     Tiling = new Vector2(10, 10),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TerrainSurface  
                 {
                     Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Gras_01/Gras_01_Dif.png"),
                     Normals =  content.Load<Texture>("Terrain/Terrain Textures/Gras_01/Gras_01_Nor.png"),

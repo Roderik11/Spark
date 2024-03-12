@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D1C8681C-6411-455D-9D05-725A25F7CFB2}</ProjectGuid>
+    <ProjectGuid>{3A9467C9-1CF3-4901-AF66-F502E7F22C77}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Spark.Client</RootNamespace>
+    <RootNamespace>Spark.Editor</RootNamespace>
     <AssemblyName>SparkEditor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -123,8 +123,51 @@
     <Compile Include="BorderlessForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\GuiWindow.cs" />
-    <Compile Include="Scripts\NPCController.cs" />
+    <Compile Include="Utils\Msg.cs" />
+    <Compile Include="Editor\TransformRotate.cs" />
+    <Compile Include="Editor\TransformScale.cs" />
+    <Compile Include="Editor\ToolBase.cs" />
+    <Compile Include="Editor\TerrainBrush.cs" />
+    <Compile Include="UI\BaseControls\TreeNodeEx.cs" />
+    <Compile Include="UI\Custom Inspectors\MeshInspector.cs" />
+    <Compile Include="UI\DockContent\ExplorerControl.cs" />
+    <Compile Include="UI\DockContent\ViewportControl.cs" />
+    <Compile Include="UI\DockContent\SettingsControl.cs" />
+    <Compile Include="UI\DockContent\AssetsControl.cs" />
+    <Compile Include="UI\BaseControls\SeachBox.cs" />
+    <Compile Include="UI\Custom Inspectors\ComponentInspector.cs" />
+    <Compile Include="UI\Custom Inspectors\MaterialInspector.cs" />
+    <Compile Include="UI\Extended\GenericInspector.cs" />
+    <Compile Include="UI\Extended\GUIInspectorAttribute.cs" />
+    <Compile Include="UI\Custom Inspectors\TextureInspector.cs" />
+    <Compile Include="UI\MenuBuilder.cs" />
+    <Compile Include="UI\PropertyControls\ValueSelectProperty.cs" />
+    <Compile Include="UI\PropertyControls\PropertyControlAttribute.cs" />
+    <Compile Include="UI\Extended\GUIInspector.cs" />
+    <Compile Include="UI\Windows\AssetBrowser.cs" />
+    <Compile Include="Editor\EditorUtility.cs" />
+    <Compile Include="UI\EditorUI.cs" />
+    <Compile Include="UI\Graph\GraphEditor.cs" />
+    <Compile Include="UI\Docking\DockIndicator.cs" />
+    <Compile Include="UI\Docking\DockRegion.cs" />
+    <Compile Include="UI\Docking\DockGroup.cs" />
+    <Compile Include="UI\PropertyControls\DoubleProperty.cs" />
+    <Compile Include="UI\PropertyControls\IntProperty.cs" />
+    <Compile Include="UI\PropertyControls\QuaternionProperty.cs" />
+    <Compile Include="UI\PropertyControls\FloatProperty.cs" />
+    <Compile Include="UI\PropertyControls\StringProperty.cs" />
+    <Compile Include="UI\PropertyControls\AssetProperty.cs" />
+    <Compile Include="UI\PropertyControls\Vector2Property.cs" />
+    <Compile Include="UI\PropertyControls\DoubleSliderProperty.cs" />
+    <Compile Include="UI\PropertyControls\BoolProperty.cs" />
+    <Compile Include="UI\PropertyControls\EnumProperty.cs" />
+    <Compile Include="UI\PropertyControls\LabelProperty.cs" />
+    <Compile Include="UI\PropertyControls\Vector3Property.cs" />
+    <Compile Include="UI\PropertyControls\ColorProperty.cs" />
+    <Compile Include="UI\PropertyControls\IntSliderProperty.cs" />
+    <Compile Include="UI\PropertyControls\FloatSliderProperty.cs" />
+    <Compile Include="UI\PropertyControls\TextureProperty.cs" />
+    <Compile Include="UI\PropertyControls\ListProperty.cs" />
     <Compile Include="IMGUI\Windows\AnimationControllerWindow.cs" />
     <Compile Include="IMGUI\Windows\SceneViewWindow.cs" />
     <Compile Include="IMGUI\Windows\EditorConsoleWindow.cs" />
@@ -132,20 +175,25 @@
     <Compile Include="IMGUI\Windows\HierarchyWindow.cs" />
     <Compile Include="IMGUI\EditorIMGUI.cs" />
     <Compile Include="UI\GuiActions.cs" />
-    <Compile Include="Scripts\CharacterController.cs" />
-    <Compile Include="Scripts\PhysicsVicinity.cs" />
+    <Compile Include="Editor\EditorCamera.cs" />
+    <Compile Include="Utils\RuntimeCompile.cs" />
     <Compile Include="IMGUI\IMGUIRenderer.cs" />
     <Compile Include="IMGUI\IMGUI.cs" />
     <Compile Include="IMGUI\Windows\DebugWindow.cs" />
     <Compile Include="IMGUI\Windows\InspectorWindow.cs" />
-    <Compile Include="GameTestScene.cs" />
-    <Compile Include="Scripts\GameUI.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Editor\EditorTestScene.cs" />
+    <Compile Include="UI\DockContent\DebugControl.cs" />
+    <Compile Include="UI\PropertyControls\PropertyFrame.cs" />
+    <Compile Include="UI\BaseControls\ScrollPanel.cs" />
+    <Compile Include="UI\PropertyControls\PropertyControl.cs" />
+    <Compile Include="UI\Windows\MessageBox.cs" />
+    <Compile Include="UI\DockContent\InspectorControl.cs" />
+    <Compile Include="UI\Windows\NoiseEditor.cs" />
+    <Compile Include="Editor\EditorTools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\MMOGui.cs" />
-    <Compile Include="Scripts\UAVTest.cs" />
-    <Compile Include="Scripts\WowCamera.cs" />
+    <Compile Include="Editor\Selector.cs" />
+    <Compile Include="Editor\TransformTranslate.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -167,6 +215,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UI\EditorDesktop.cs" />
+    <Compile Include="UI\BaseControls\GuiWindow.cs" />
     <Compile Include="UI\SquidRenderer.cs" />
   </ItemGroup>
   <ItemGroup>

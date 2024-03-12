@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Spark.Client
+namespace Spark.Editor
 {
     public class HierarchyWindow : EditorWindow
     {
@@ -33,8 +33,8 @@ namespace Spark.Client
             var size = IMGUI.GetTextSize(entity.Name, IMGUI.Font);
             var rect = IMGUI.GetNextRect(size);
 
-            //if (entity == Selector.SelectedEntity)
-            //    IMGUI.Box(rect, selectedColor);
+            if (entity == Selector.SelectedEntity)
+                IMGUI.Box(rect, selectedColor);
 
             var count = entity.Transform.GetChildCount();
             if (count > 0)
@@ -51,8 +51,8 @@ namespace Spark.Client
                         entity.EditorFlags &= ~EditorFlags.Expanded;
                 }
 
-                //if (clicked)
-                //    Selector.SelectedEntity = entity;
+                if (clicked)
+                    Selector.SelectedEntity = entity;
 
                 if (expanded)
                 {
@@ -68,8 +68,8 @@ namespace Spark.Client
             {
                 rect.x += 16;rect.w -= 16;
 
-                //if (IMGUI.Item(rect, entity.Name))
-                //    Selector.SelectedEntity = entity;
+                if (IMGUI.Item(rect, entity.Name))
+                    Selector.SelectedEntity = entity;
             }
         }
     }

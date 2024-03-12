@@ -2,23 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using SharpDX;
-using SharpDX.Direct3D11;
 using SharpDX.Windows;
 using Squid;
-using YamlDotNet;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization;
 
-namespace Spark.Client
+namespace Spark.Editor
 {
     public class EditorApp
     {
@@ -108,7 +99,7 @@ namespace Spark.Client
         }
     }
 
-    public static class Editor
+    public static class EditorUtility
     {
         public class SerializedEntity
         {
@@ -177,8 +168,7 @@ namespace Spark.Client
         public static void LoadScene(string path)
         {
             var loader = new SceneLoader();
-            loader.Load(@"D:\Dump\ExportedScene.json");
-            MessageDispatcher.Send(Msg.RefreshExplorer);
+            loader.Load(@"D:\Dump\ExportedScene.json");  
 
             return;
 

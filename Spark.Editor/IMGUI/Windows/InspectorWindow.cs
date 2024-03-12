@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Spark.Client
+namespace Spark.Editor
 {
     public class InspectorWindow : EditorWindow
     {
@@ -13,25 +13,25 @@ namespace Spark.Client
 
         void onSelectionChanged(Message msg)
         {
-            //selectedEntity = Selector.SelectedEntity;
+            selectedEntity = Selector.SelectedEntity;
 
-            //editors.Clear();
+            editors.Clear();
 
-            //if(selectedEntity != null)
-            //{
-            //    foreach (var selected in selectedEntity.GetComponents())
-            //    {
-            //        var editor = new GenericEditor();
-            //        editor.SetTargets(selected);
-            //        editor.OnEnable();
-            //        editors.Add(editor);
-            //    }
-            //}
+            if(selectedEntity != null)
+            {
+                foreach (var selected in selectedEntity.GetComponents())
+                {
+                    var editor = new GenericEditor();
+                    editor.SetTargets(selected);
+                    editor.OnEnable();
+                    editors.Add(editor);
+                }
+            }
         }
 
         protected override void OnEnable()
         {
-           // MessageDispatcher.AddListener(Msg.SelectionChanged, onSelectionChanged);
+            MessageDispatcher.AddListener(Msg.SelectionChanged, onSelectionChanged);
         }
 
         protected override void OnGUI()

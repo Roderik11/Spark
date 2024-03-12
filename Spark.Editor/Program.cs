@@ -1,13 +1,8 @@
 using System;
 using System.Threading;
 using System.Globalization;
-using System.Windows.Forms;
-using Spark;
-using Squid;
-using System.Collections.Generic;
-using SharpDX;
 
-namespace Spark.Client
+namespace Spark.Editor
 {
     static class Program
     {
@@ -16,7 +11,7 @@ namespace Spark.Client
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-            var app = new Game();
+            var app = new EditorApp();
             app.Run();
         }
     }

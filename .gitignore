@@ -13,3 +13,5 @@
 /Spark.Windows/obj
 /Spark.WPF/obj
 /Spark/build
+/Spark.Editor/build
+/Spark.Editor/.vs

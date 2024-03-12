@@ -149,6 +149,9 @@
     <Compile Include="Base\Attributes.cs" />
     <Compile Include="Base\Component.cs" />
     <Compile Include="Base\Entity.cs" />
+    <Compile Include="ContentUtil.cs" />
+    <Compile Include="Reflection\GUIObject.cs" />
+    <Compile Include="SceneLoader.cs" />
     <Compile Include="Utils\DDSTextureLoader.cs" />
     <Compile Include="Components\AudioSource.cs" />
     <Compile Include="Components\AudioListener.cs" />

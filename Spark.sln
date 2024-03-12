@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Client", "Spark.Clien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Squid.Core", "D:\Projects\2019\SQUID\Squid.Core\Squid.Core.csproj", "{631EE234-C3DA-4332-B9D0-258CD01EA2DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark.Editor", "Spark.Editor\Spark.Editor.csproj", "{3A9467C9-1CF3-4901-AF66-F502E7F22C77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,19 +71,35 @@ Global
 		{631EE234-C3DA-4332-B9D0-258CD01EA2DA}.Release|x64.Build.0 = Release|x64
 		{631EE234-C3DA-4332-B9D0-258CD01EA2DA}.Release|x86.ActiveCfg = Release|x86
 		{631EE234-C3DA-4332-B9D0-258CD01EA2DA}.Release|x86.Build.0 = Release|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|x64.Build.0 = Debug|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|x86.ActiveCfg = Debug|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Debug|x86.Build.0 = Debug|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|x64.ActiveCfg = Release|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|x64.Build.0 = Release|Any CPU
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|x86.ActiveCfg = Release|x86
+		{3A9467C9-1CF3-4901-AF66-F502E7F22C77}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F5B23B21-A609-44A9-8054-1FD38990DD27}
-		VSStyle = Lakrits.vssf
-		VSTargetControls = FormsAndControls
-		VSToolStripStyle = Mixed
-		VSTextShadow = True
-		VSSkinFlatStyles = True
-		VSSkinToggleButtons = True
-		VSUseSystemFonts = False
 		VSCustomBkgrdPaint = True
+		VSUseSystemFonts = False
+		VSSkinToggleButtons = True
+		VSSkinFlatStyles = True
+		VSTextShadow = True
+		VSToolStripStyle = Mixed
+		VSTargetControls = FormsAndControls
+		VSStyle = Lakrits.vssf
+		SolutionGuid = {F5B23B21-A609-44A9-8054-1FD38990DD27}
 	EndGlobalSection
 EndGlobal

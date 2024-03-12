@@ -2,6 +2,7 @@
 using SharpDX.WIC;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Spark
 {
@@ -110,14 +111,11 @@ namespace Spark
         public void SetParameter<T>(string name, T value) => Effect.SetParameter(name, value);
         public bool SetValue<T>(string name, T value) => Effect.SetValue(name, value);
 
-        private readonly int _instanceId = _instanceCount++;
+        private readonly int _instanceId = Interlocked.Increment(ref _instanceCount);
 
         private static volatile int _instanceCount;
 
-        public int GetInstanceId()
-        {
-            return _instanceId;
-        }
+        public int GetInstanceId() => _instanceId;
     }
 
     public class MaterialBlock

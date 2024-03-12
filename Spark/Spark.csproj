@@ -130,6 +130,9 @@
     <Compile Include="Animation\AnimationCurve.cs" />
     <Compile Include="Animation\AnimationMask.cs" />
     <Compile Include="AssetInfo.cs" />
+    <Compile Include="Assets\MeshPacker.cs" />
+    <Compile Include="Assets\AssetPacker.cs" />
+    <Compile Include="Assets\AssetReader.cs" />
     <Compile Include="Assets\Importers\AnimationClipReader.cs" />
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\AnimationBlendTree.cs" />
@@ -141,7 +144,7 @@
     <Compile Include="Animation\Bone.cs" />
     <Compile Include="Animation\QuaternionKey.cs" />
     <Compile Include="Animation\VectorKey.cs" />
-    <Compile Include="Assets\IAsset.cs" />
+    <Compile Include="Assets\Asset.cs" />
     <Compile Include="Assets\LODGroup.cs" />
     <Compile Include="Assets\Mesh.Grid.cs" />
     <Compile Include="Assets\Importers\MaterialReader.cs" />
@@ -150,6 +153,16 @@
     <Compile Include="Base\Attributes.cs" />
     <Compile Include="Base\Component.cs" />
     <Compile Include="Base\Entity.cs" />
+    <Compile Include="IDGenerator.cs" />
+    <Compile Include="Interfaces\IAsset.cs" />
+    <Compile Include="Interfaces\ISerialize.cs" />
+    <Compile Include="Interfaces\IDRef.cs" />
+    <Compile Include="Interfaces\IDrawDebug.cs" />
+    <Compile Include="Interfaces\IParallel.cs" />
+    <Compile Include="Interfaces\IMousePick.cs" />
+    <Compile Include="Interfaces\IDraw.cs" />
+    <Compile Include="Interfaces\IUpdate.cs" />
+    <Compile Include="Utils\JSONSerializer.cs" />
     <Compile Include="Utils\SceneUtil.cs" />
     <Compile Include="Reflection\GUIObject.cs" />
     <Compile Include="Utils\SceneLoader.cs" />
@@ -334,7 +347,6 @@
     <Compile Include="Components\MeshRenderer.cs" />
     <Compile Include="Components\SpotLight.cs" />
     <Compile Include="Components\SkyboxRenderer.cs" />
-    <Compile Include="Interfaces\IPreloadable.cs" />
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Importers\MeshReader.cs" />
     <Compile Include="Assets\Texture.cs" />
@@ -345,10 +357,6 @@
     <Compile Include="Utils\NativeMethods.cs" />
     <Compile Include="Base\RenderView.cs" />
     <Compile Include="Shaders\States.cs" />
-    <Compile Include="Utils\ObjectGraph.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Assets\Prototype.cs" />
     <Compile Include="Structs\Frustum.cs" />
     <Compile Include="Components\DirectionalLight.cs" />
     <Compile Include="Utils\StructuredBuffer.cs" />
@@ -414,6 +422,7 @@
     <None Include="Resources\simplexNoise.hlsl" />
     <None Include="Resources\terrain2.fx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AssimpNet.5.0.0-beta1\build\AssimpNet.targets" Condition="Exists('..\packages\AssimpNet.5.0.0-beta1\build\AssimpNet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

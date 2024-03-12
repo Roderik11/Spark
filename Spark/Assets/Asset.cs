@@ -2,13 +2,6 @@
 
 namespace Spark
 {
-    public interface IAsset
-    {
-        Guid Id { get; }
-        string Name { get; }
-        string Path { get; }
-    }
-
     public abstract class Asset : IAsset
     {
         public Guid Id { get; }
@@ -23,8 +16,4 @@ namespace Spark
 
     }
 
-    public interface IInstance
-    {
-        int GetInstanceID();
-    }
 }

@@ -7,6 +7,7 @@ using Buffer = SharpDX.Direct3D11.Buffer;
 using SharpDX.DXGI;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 
 namespace Spark
 {
@@ -46,7 +47,7 @@ namespace Spark
     {
         private static volatile int _instanceCount;
 
-        private readonly int _instanceId = _instanceCount++;
+        private readonly int _instanceId = Interlocked.Increment(ref _instanceCount);
         private readonly VertexBufferBinding[] bindings = new VertexBufferBinding[15];
         private BitSet dirtyFlags = new BitSet(1);
         private bool dirtyIndices;

@@ -227,8 +227,6 @@ namespace Spark
 
                 if (assetType == typeof(Mesh))
                 {
-                    Debug.Log("Importing Mesh:" + relativePath);
-
                     var scale = relativePath.EndsWith(".dae") ? 0.01f : 1f;
                     var mod = ("Scale", scale);
 
@@ -248,9 +246,14 @@ namespace Spark
                         meshPacker.Pack(writer, mesh);
                         filestream.Flush();
                         filestream.Close();
+                    
+                        Debug.Log("Imported Mesh:" + relativePath);
+                    }
+                    else
+                    {
+                        Debug.Log("Failed to load Mesh:" + relativePath);
                     }
                 }
-
             }
         }
 
@@ -283,8 +286,6 @@ namespace Spark
                 if (thumbHash.TryGetValue(metaData.Guid, out var thumbnailInfo))
                     continue;
 
-                Debug.Log("Generating Thumbnail:" + relativePath);
-
                 Texture thumbnailTexture = null;
 
                 if (assetType == typeof(Texture))
@@ -295,6 +296,8 @@ namespace Spark
 
                 if (thumbnailTexture == null)
                     continue;
+
+                Debug.Log("Generated Thumbnail:" + relativePath);
 
                 var path = Path.Combine(thumbsDir.FullName, $"{metaData.Guid}.png");
                 thumbnailTexture.Save(path, 128, 128);

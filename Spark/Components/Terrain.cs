@@ -13,7 +13,7 @@ namespace Spark
     public class Terrain : Component, IDraw, IUpdate
     {
         [Serializable]
-        public class TerrainSurface
+        public class TextureLayer
         {
             public Texture Diffuse;
             public Texture Normals;
@@ -184,7 +184,7 @@ namespace Spark
         public Vector2 TerrainSize = new Vector2(4096 * 2, 4096 * 2);
         public float MaxHeight = 1024;
 
-        public List<TerrainSurface> Surfaces = new List<TerrainSurface>();
+        public List<TextureLayer> Layers = new List<TextureLayer>();
 
         public float[,] HeightField { get; set; }
         //public RenderTexture2D NormalMap { get; private set; }
@@ -255,9 +255,9 @@ namespace Spark
             var normals = new List<Texture>();
             var tiling = new List<Vector2>();
 
-            for (int i = 0; i < Surfaces.Count; i++)
+            for (int i = 0; i < Layers.Count; i++)
             {
-                var layer = Surfaces[i];
+                var layer = Layers[i];
                 diffuse.Add(layer.Diffuse);
                 normals.Add(layer.Normals);
                 tiling.Add(layer.Tiling);

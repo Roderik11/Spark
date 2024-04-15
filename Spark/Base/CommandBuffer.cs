@@ -14,7 +14,7 @@ namespace Spark
     public class CommandBuffer
     {
         private static readonly List<InstanceBatch> batchlist = new List<InstanceBatch>();
-        private static readonly Dictionary<long, InstanceBatch> batches = new Dictionary<long, InstanceBatch>();
+        private static readonly Dictionary<BatchKey, InstanceBatch> batches = new Dictionary<BatchKey, InstanceBatch>();
         private static readonly Dictionary<RenderPass, int> TotalDrawNonInstanced = new Dictionary<RenderPass, int>();
         private static readonly Dictionary<RenderPass, int> TotalDrawInstanced = new Dictionary<RenderPass, int>();
         private static readonly Dictionary<RenderPass, int> TotalInstances = new Dictionary<RenderPass, int>();
@@ -28,6 +28,31 @@ namespace Spark
         class DrawCallList : ConcurrentStack<DrawCall>
         {
 
+        }
+
+        struct BatchKey : IEquatable<BatchKey>
+        {
+            public int material;
+            public int mesh;
+            public int meshpart;
+
+            public bool Equals(BatchKey other)
+            {
+                return other.material == material && other.mesh == mesh && other.meshpart == meshpart; 
+            }
+        }
+
+        class BatchKeyComparer : IEqualityComparer<BatchKey>
+        {
+            public bool Equals(BatchKey x, BatchKey y)
+            {
+                return x.Equals(y);
+            }
+
+            public int GetHashCode(BatchKey obj)
+            {
+                return obj.GetHashCode();
+            }
         }
 
         class Pass
@@ -257,7 +282,8 @@ namespace Spark
 
         private struct DrawCall
         {
-            public long Hash;
+            //public long Hash;
+            public BatchKey Key;
             public Mesh Mesh;
             public int MeshPart;
             public Material Material;
@@ -329,7 +355,6 @@ namespace Spark
             foreach (var p in material.GetPasses())
             {
                 //var hash = (mesh.GetInstanceId(), material.GetInstanceId(), meshPart).GetHashCode();
-                var hash = CombineHashCodes(mesh.GetInstanceId(), material.GetInstanceId(), meshPart);
 
                 current.Passes[p.RenderPass].Quickset[index].Push(new DrawCall()
                 {
@@ -337,7 +362,8 @@ namespace Spark
                     MeshPart = meshPart,
                     Material = material,
                     Params = block,
-                    Hash = hash
+                   // Hash = 0,
+                    Key = new BatchKey { material = material.GetHashCode(), mesh = mesh.GetHashCode(), meshpart = meshPart }
                 });
             }
         }
@@ -346,18 +372,6 @@ namespace Spark
         {
             foreach (var pair in current.Passes)
                 pair.Value.Clear();
-        }
-
-        public static long CombineHashCodes(int hashCode1, int hashCode2, int hashCode3)
-        {
-            unchecked
-            {
-                long hash = 17; // Initialize with a prime number
-                hash = hash * 31 + hashCode1; // Multiply by a prime and add first integer
-                hash = hash * 31 + hashCode2; // Multiply by a prime and add second integer
-                hash = hash * 31 + hashCode3; // Multiply by a prime and add third integer
-                return hash;
-            }
         }
 
         public static void ClearStatistics()
@@ -420,18 +434,19 @@ namespace Spark
 
             Profiler.Start("Create Batches");
 
-            long hash = 0;
+          //  long hash = 0;
+            BatchKey key = new BatchKey();
             InstanceBatch batch = null;
             foreach (var drawCall in p.InstancedCalls)
             {
-                if (hash != drawCall.Hash)
+                if (!key.Equals(drawCall.Key))
                 {
-                    hash = drawCall.Hash;
+                    key = drawCall.Key;
 
-                    if (!batches.TryGetValue(hash, out batch))
+                    if (!batches.TryGetValue(key, out batch))
                     {
                         batch = new InstanceBatch(drawCall.Mesh, drawCall.MeshPart, drawCall.Material);
-                        batches.Add(drawCall.Hash, batch);
+                        batches.Add(key, batch);
                         batchlist.Add(batch);
                     }
                 }

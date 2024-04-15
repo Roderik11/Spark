@@ -256,7 +256,7 @@ FragmentOutput PS(VertexOutput input)
     vNormal = blend_linear(vNormal, normal.xyz);
     vNormal = mul(vNormal, (float3x3) View);
 
-    output.Albedo = float4(color.rgb * 2.2f , 1);
+    output.Albedo = float4(color.rgb , 1);
     output.Normals = float4(vNormal.xyz, 1);
     output.Data = float4(vDataMap.r, vDataMap.g, vDataMap.b, vDataMap.a);
     output.Depth = input.Depth;

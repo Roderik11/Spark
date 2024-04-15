@@ -30,7 +30,7 @@ namespace Spark
         {
             var lodgroup = StaticMesh.LODGroup;
             var distance = Vector3.Distance(worldPosition, Camera.Main.WorldPosition);
-            var size = DistanceAndDiameterToScreenRatio(distance, _boundingSphere.Radius);
+            var size = DistanceAndDiameterToScreenRatio(distance, _boundingSphere.Radius * 1);
             var min = Math.Min(lodgroup.Ranges.Count, StaticMesh.LODs.Count);
 
             for (int i = 0; i < min; i++)

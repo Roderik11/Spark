@@ -17,102 +17,102 @@ namespace Spark.Editor
         {
             Engine.Settings.VSync = true;
 
-            AssetManager content = new AssetManager(Engine.Device)
+            AssetManager assets = new AssetManager(Engine.Device)
             {
                 BaseDirectory = Engine.ResourceDirectory
             };
 
 
-            var terrainLayers = new List<Terrain.TerrainSurface>
+            var terrainLayers = new List<Terrain.TextureLayer>
             {
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Sand_01/Sand_01_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Sand_01/Sand_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Sand_01/Sand_01_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Sand_01/Sand_01_Nor.png"),
                     Tiling = new Vector2(8, 8),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/RockWall_01/RockWall_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain Textures/RockWall_01/Rock_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/RockWall_01/RockWall_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain Textures/RockWall_01/Rock_01_Nor.png"),
                     Tiling = new Vector2(7, 7),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_01_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_01_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_01_Nor.png"),
                     Tiling = new Vector2(4, 4),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Sand_Dirt/Sand_Dirt.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Sand_Dirt/Sand_Dirt_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Sand_Dirt/Sand_Dirt.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Sand_Dirt/Sand_Dirt_Nor.png"),
                     Tiling = new Vector2(20, 30),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Sandstone/Sandstone_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Sandstone/Sandstone_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Sandstone/Sandstone_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Sandstone/Sandstone_Nor.png"),
                     Tiling = new Vector2(10, 10),
                 },
-                new Terrain.TerrainSurface  
+                new Terrain.TextureLayer  
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Gras_01/Gras_01_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Gras_01/Gras_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Gras_01/Gras_01_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Gras_01/Gras_01_Nor.png"),
                     Tiling = new Vector2(4, 4),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Sand_02/Sand_02_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Sand_02/Sand_02_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Sand_02/Sand_02_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Sand_02/Sand_02_Nor.png"),
                     Tiling = new Vector2(10, 10),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Leafs/Leafs_01_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Leafs/Leafs_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Leafs/Leafs_01_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Leafs/Leafs_01_Nor.png"),
                     Tiling = new Vector2(3, 3),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/RockWall_01/RockWall_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/RockWall_01/Rock_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/RockWall_01/RockWall_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/RockWall_01/Rock_01_Nor.png"),
                     Tiling = new Vector2(20, 15),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_02_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_02_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Dirt/Dirt_01_Nor.png"),
                     Tiling = new Vector2(15, 15),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Raw_Dirt/Raw_Dirt_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Raw_Dirt/Raw_Dirt_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Raw_Dirt/Raw_Dirt_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Raw_Dirt/Raw_Dirt_Nor.png"),
                     Tiling = new Vector2(4, 4),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/Moos/Moss_01_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/Moos/Moss_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/Moos/Moss_01_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/Moos/Moss_01_Nor.png"),
                     Tiling = new Vector2(4, 4),
                 },
-                new Terrain.TerrainSurface
+                new Terrain.TextureLayer
                 {
-                    Diffuse =  content.Load<Texture>("Terrain/Terrain Textures/RockWall_01/RockWall_Dif.png"),
-                    Normals =  content.Load<Texture>("Terrain/Terrain Textures/RockWall_01/Rock_01_Nor.png"),
+                    Diffuse =  assets.Load<Texture>("Terrain/Terrain Textures/RockWall_01/RockWall_Dif.png"),
+                    Normals =  assets.Load<Texture>("Terrain/Terrain Textures/RockWall_01/Rock_01_Nor.png"),
                     Tiling = new Vector2(200, 200),
                 },
             };
 
-            Texture mergedSplatmap = content.Load<Texture>("Terrain/Control Textures/SplatMapMerged.dds");
-            Texture indexMap = content.Load<Texture>("Terrain/Control Textures/SplatMapIndices.dds");
+            Texture mergedSplatmap = assets.Load<Texture>("Terrain/Control Textures/SplatMapMerged.dds");
+            Texture indexMap = assets.Load<Texture>("Terrain/Control Textures/SplatMapIndices.dds");
 
             //Texture tex1 = content.Load<Texture>("ps_texture_4k.png");
-            Texture tex1 = content.Load<Texture>("DefaultColorMap.dds");
-            Texture tex2 = content.Load<Texture>("DefaultNormalMap.dds");
-            Texture tex3 = content.Load<Texture>("DefaultSpecularMap.dds");
-            Texture reflection = content.Load<Texture>("SkyboxSet1/ThickCloudsWater/cubemap.dds");
+            Texture tex1 = assets.Load<Texture>("DefaultColorMap.dds");
+            Texture tex2 = assets.Load<Texture>("DefaultNormalMap.dds");
+            Texture tex3 = assets.Load<Texture>("DefaultSpecularMap.dds");
+            Texture reflection = assets.Load<Texture>("SkyboxSet1/ThickCloudsWater/cubemap.dds");
 
             Effect waterEffect = new Effect("mesh_unlit");
             waterEffect.SetValue("Color", new Vector4(0, .5f, 1, .5f));
@@ -195,7 +195,7 @@ namespace Spark.Editor
                     Heightmap = heightmap,
                     HeightField = heightfield,
                     MaxHeight = terrainHeight,
-                    Surfaces = terrainLayers
+                    Layers = terrainLayers
                 },
                 new RigidBody
                 {
@@ -207,16 +207,16 @@ namespace Spark.Editor
             terrain.Transform.Position = new Vector3(842.0983f - 842.0983f, 85.85109f - 39.8f, 841.4021f - 839.8109f);
             //terrain.Transform.Position = new Vector3(-mapsize.X / 2, 0, -mapsize.Y / 2);
 
-            var water = new Entity("water", new MeshRenderer
-            {
-                Mesh = Mesh.CreatePlane(AxisAlignment.XZ),
-                Materials = { waterMaterial }
-            });
+            //var water = new Entity("water", new MeshRenderer
+            //{
+            //    Mesh = Mesh.CreatePlane(AxisAlignment.XZ),
+            //    Materials = { waterMaterial }
+            //});
 
-            water.Transform.Position = terrain.Transform.Position + new Vector3(mapsize.X / 2, 20, mapsize.Y / 2) + Vector3.Up * 3;
-            water.Transform.Scale = new Vector3(mapsize.X, 1, mapsize.X);
+            //water.Transform.Position = terrain.Transform.Position + new Vector3(mapsize.X / 2, 20, mapsize.Y / 2) + Vector3.Up * 3;
+            //water.Transform.Scale = new Vector3(mapsize.X, 1, mapsize.X);
 
-            var grassTex = content.Load<Texture>("Textures/grass_atlas_2x2.dds");
+            var grassTex = assets.Load<Texture>("Textures/grass_atlas_2x2.dds");
             var decEffect = new Effect("mesh_grass");
             decEffect.SetValue("Albedo", grassTex);
             decEffect.SetValue("Normal", tex2);
@@ -289,7 +289,7 @@ namespace Spark.Editor
             {
                 pos += new Vector3(RNG.RangeFloat(-size, size), 100, RNG.RangeFloat(-size, size));
                 pos.Y = terrain.GetComponent<Terrain>().GetHeight(pos) + 1;
-                SceneUtil.AddNPC(content, pos);
+                SceneUtil.AddNPC(assets, pos);
             }
         }
     }

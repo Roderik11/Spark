@@ -409,6 +409,7 @@
     </Content>
     <Content Include="Jitter\ToDo.txt" />
     <Content Include="Resources\doodles.txt" />
+    <None Include="Resources\ocean.fx" />
     <None Include="Resources\mesh_forward.fx" />
     <None Include="Resources\water.fx" />
     <Content Include="Experimental\XMLFile1.xml" />

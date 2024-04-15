@@ -126,7 +126,7 @@ float4 PS(VertexOutput IN, float4 pos: SV_Position) : SV_TARGET
 
     float h = max(0, intersectionPoint.y - vPosition.y);
     float vol = distance(intersectionPoint, vPosition.xyz);
-    float fade = map(h, 0, .5f, 0, 1);
+    float fade = map(h, 0, 2, 0, 1);
     
     float3 transmissionCoEff = float3(.5f, .8f, .86f);
     float meanBackScatterDist = 8;
@@ -142,9 +142,14 @@ float4 PS(VertexOutput IN, float4 pos: SV_Position) : SV_TARGET
     float2 dir1 = normalize(float2(-.1f, .6f));
     float2 dir2 = normalize(float2(-.2f, .5f));
     
-    float3 sample1 = waterNormals.SampleLevel(sampData, wuv1 + dir1 * Time * 0.04f, 0).xzy;
-    float3 sample2 = waterNormals.SampleLevel(sampData, wuv2 + dir2 * Time * -0.04f, 0).xzy;
+    float mip = min(8, dist / 10);
+
+    //float3 sample1 = waterNormals.SampleLevel(sampData, wuv1 + dir1 * Time * 0.04f, 7).xzy;
+    //float3 sample2 = waterNormals.SampleLevel(sampData, wuv2 + dir2 * Time * -0.04f, 7).xzy;
     
+    float3 sample1 = waterNormals.Sample(sampData, wuv1 + dir1 * Time * 0.04f).xzy;
+    float3 sample2 = waterNormals.Sample(sampData, wuv2 + dir2 * Time * -0.04f).xzy;
+
     float3 waterNormal = (sample1 + sample2) / 2;
     waterNormal.xz = waterNormal.xz * 2 - 1;
     waterNormal = normalize(waterNormal);

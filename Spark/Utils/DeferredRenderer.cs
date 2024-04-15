@@ -131,7 +131,7 @@ namespace Spark
             FXWater.SetParameter("View", camera.View);
             FXWater.SetParameter("ViewDirection", camera.Transform.Forward);
             FXWater.SetParameter("CameraInverse", Matrix.Invert(camInv));
-            FXWater.SetParameter("sampData", Samplers.WrappedBilinear);
+            FXWater.SetParameter("sampData", Samplers.WrappedAnisotropic);
             FXWater.SetParameter("Albedo", Composite);
             FXWater.SetParameter("Normal", Normals);
             FXWater.SetParameter("Depth", Depth);

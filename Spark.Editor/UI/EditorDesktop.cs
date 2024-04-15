@@ -384,7 +384,11 @@ namespace Spark.Editor
             DropDownButton btn = CreateMenuItem(menuBar, "File");
 
             AddMenuItem(btn, "New Scene", (s, a) => { EditorUtility.TextureRoundtripTest(); });
-            AddMenuItem(btn, "Open Scene", (s, a) => { EditorUtility.LoadScene(""); });
+            AddMenuItem(btn, "Open Scene", (s, a) =>
+            {
+                EditorUtility.LoadScene(""); 
+                MessageDispatcher.Send(Msg.RefreshExplorer);
+            });
             var sub = AddMenuItem(btn, "Open Recent", null);
             AddSeparator(btn);
             AddMenuItem(btn, "Save Scene", (s, a) => { EditorUtility.SaveScene(""); });

@@ -37,7 +37,7 @@ namespace Spark
         {
             get
             {
-                var result = targets[0];
+                var result = field.GetValue(targets[0]);
 
                 for (int i = 1; i < targets.Length; i++)
                 {
@@ -257,7 +257,7 @@ namespace Spark
                 if (field.Ignored) continue;
                 if(!field.IsPublic) continue;
                
-                if (counts[name] != targets.Length) continue;
+                if (counts[name] != distinctTypes) continue;
 
                 BrowsableAttribute browsable = field.GetAttribute<BrowsableAttribute>();
                 if (browsable == null && !field.CanWrite) continue;

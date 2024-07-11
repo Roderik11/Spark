@@ -13,7 +13,7 @@ Some highlights:
 - Customizable render pipeline
 - Aggressive use of instancing
 - Skeletal animation (matrix palette skinning) with blendtrees
-- Primitive static mesh LOD group system
+- Simple mesh LOD group system (viewspace size)
 - Quadtree terrain with LOD and 16 splatmaps
 - Cascaded shadow map for single directional light using TextureArray (4 cascades, working but unfinished)
 - Icoseptree spatialization for culling, raycasts and shape queries

@@ -15,7 +15,7 @@ Some highlights:
 - Icoseptree spatialization for culling and shape queries
 - GeometryShader for foilage (booh, MeshShaders next)
 - multithreaded, using all available cores where possible 
-- CommandBuffer pattern to minimize state swtiching and efficient DrawCall handling
+- CommandBuffer pattern to minimize state switching and efficient DrawCall handling
 - Unity-esque components and script execution
 - Unity-esque customizable editor
 - Editor UI created with Squid - probably the best example for complex UIs

@@ -9,6 +9,7 @@ Took inspiration from both Unity and Unreal.
 
 
 Some highlights:
+- deferred renderer
 - customizable render pipeline
 - aggressive use of instancing
 - skeletal animation (matrix palette skinning) with blendtrees
@@ -32,7 +33,10 @@ GUI: https://github.com/Roderik11/Squid
 
 Future plans:
 - Graphics API: either WebGPU or Vortice.Windows
-- Physics: Jitter2 
+- Physics: Jitter2
+- "Bindless" approach
+- GPU frustum and occlusion culling
+- Forward+ pipeline
 
 ![image](https://github.com/Roderik11/Spark/assets/5743257/013eb957-242b-48b6-920d-29903a9a5e17)
 ![image](https://github.com/Roderik11/Spark/assets/5743257/2b572531-5812-4003-8f90-2b4150faabbf)

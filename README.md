@@ -40,6 +40,7 @@ Future plans:
 - "Bindless" approach
 - GPU frustum and occlusion culling
 - Forward+ renderer
+- Asset packaging and Executable export from Editor
 
 ![image](https://github.com/Roderik11/Spark/assets/5743257/013eb957-242b-48b6-920d-29903a9a5e17)
 ![image](https://github.com/Roderik11/Spark/assets/5743257/2b572531-5812-4003-8f90-2b4150faabbf)

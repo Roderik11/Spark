@@ -22,7 +22,7 @@ Some highlights:
 - CommandBuffer pattern to minimize state switching and efficient DrawCall handling
 - Unity-esque components, script execution and Asset system
 - Unity-esque extendable editor with custom inspectors etc.
-- Editor UI created with Squid - probably the best example for complex UIs
+- Editor UI created with Squid - the best example for complex Squid UIs
 
 
 DirectX Bindings: https://github.com/sharpdx/SharpDX

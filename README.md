@@ -16,7 +16,7 @@ Some highlights:
 - Primitive static mesh LOD group system
 - Quadtree terrain with LOD and 16 splatmaps
 - Cascaded shadow map for single directional light using TextureArray (4 cascades, working but unfinished)
-- Icoseptree spatialization for culling and shape queries
+- Icoseptree spatialization for culling, raycasts and shape queries
 - GeometryShader for foilage (booh, MeshShaders next)
 - Multithreaded, using all available cores where possible 
 - CommandBuffer pattern to minimize state switching and efficient DrawCall handling

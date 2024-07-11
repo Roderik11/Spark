@@ -9,16 +9,17 @@ Took inspiration from both Unity and Unreal.
 
 
 Some highlights:
-- deferred renderer
-- customizable render pipeline
-- aggressive use of instancing
-- skeletal animation (matrix palette skinning) with blendtrees
+- Deferred renderer
+- Customizable render pipeline
+- Aggressive use of instancing
+- Skeletal animation (matrix palette skinning) with blendtrees
+- Quadtree terrain with LOD and 16 splatmaps
 - Icoseptree spatialization for culling and shape queries
 - GeometryShader for foilage (booh, MeshShaders next)
-- multithreaded, using all available cores where possible 
+- Multithreaded, using all available cores where possible 
 - CommandBuffer pattern to minimize state switching and efficient DrawCall handling
-- Unity-esque components and script execution
-- Unity-esque customizable editor
+- Unity-esque components, script execution and Asset system
+- Unity-esque customizable editor with custom inspectors etc.
 - Editor UI created with Squid - probably the best example for complex UIs
 
 

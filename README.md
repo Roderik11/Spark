@@ -1,5 +1,5 @@
 # Spark
-C# Game Engine
+C# DirectX Game Engine
 
 Totally raw and unfiltered.
 

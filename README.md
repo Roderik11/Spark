@@ -19,7 +19,7 @@ Some highlights:
 - Multithreaded, using all available cores where possible 
 - CommandBuffer pattern to minimize state switching and efficient DrawCall handling
 - Unity-esque components, script execution and Asset system
-- Unity-esque customizable editor with custom inspectors etc.
+- Unity-esque extendable editor with custom inspectors etc.
 - Editor UI created with Squid - probably the best example for complex UIs
 
 

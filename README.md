@@ -10,7 +10,7 @@ Took inspiration from both Unity and Unreal.
 
 Some highlights:
 - customizable render pipeline
-- agressive use of instancing
+- aggressive use of instancing
 - skeletal animation (matrix palette skinning) with blendtrees
 - Icoseptree spatialization for culling and shape queries
 - GeometryShader for foilage (booh, MeshShaders next)

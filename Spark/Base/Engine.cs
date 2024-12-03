@@ -10,10 +10,6 @@ using SharpDX.Direct2D1;
 
 namespace Spark
 {
-    public delegate void DrawTextHandler(string text, SharpDX.Vector3 position);
-
-    public delegate void EngineTickHandler(float deltaTime);
-
     public static class Engine
     {
         internal static SharpDX.DXGI.Factory Factory;
@@ -28,7 +24,6 @@ namespace Spark
 
         public static SharpDX.WIC.ImagingFactory2 WicFactory { get; private set; }
 
-
         public static bool IsEditor { get; private set; }
         public static bool Running { get; private set; }
         public static EngineSettings Settings { get; private set; }
@@ -38,10 +33,9 @@ namespace Spark
 
         public static string ResourceDirectory { get; private set; }
 
-        public static event DrawTextHandler OnDrawText;
+        public static event Action<string, Vector3> OnDrawText;
 
         public static int TickCount => tickCount;
-        //public static event EngineTickHandler OnTick;
 
         static Engine()
         {

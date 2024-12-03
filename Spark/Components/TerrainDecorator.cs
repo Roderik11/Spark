@@ -192,7 +192,8 @@ namespace Spark
             effect.SetParameter("Offset", -Terrain.Transform.WorldPosition);
             effect.SetParameter("MapSize", Terrain.TerrainSize);
             effect.SetParameter("HeightTexel", 1f / Terrain.Heightmap.Description.Width);
-           
+            effect.SetParameter("ControlMaps", Terrain.ControlMaps);
+
             var view = Camera.MainCamera.View * Camera.MainCamera.Projection;
             var frustum = new BoundingFrustum(view);
 

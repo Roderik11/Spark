@@ -20,6 +20,7 @@ Texture2D Albedo <string Property="Albedo";>;
 Texture2D Normal <string Property="Normal";>;
 Texture2D Data	 <string Property="Data";>;
 Texture2D Height <string Property="Height";>;
+Texture2DArray ControlMaps <string Property="ControlMaps";>;
 
 float MaxHeight <string Property="MaxHeight";>;
 
@@ -115,84 +116,91 @@ void GS_Quad(point VertexOutput vert[1], inout TriangleStream<GeoOutput> triStre
 
     float4 worldPosition = input.Position; // mul(float4(input.Position, 1), World);
     float2 uv = float2(worldPosition.x + Offset.x, worldPosition.z + Offset.z) / MapSize;
+    float2 uv2 = uv;
+    uv2.y = 1 - uv.y;
 
+    //float4 weights0 = ControlMaps.SampleLevel(sampData, float3(uv, 0), 0);
+    //float occl = weights0.x + weights0.y + weights0.z + weights0.w;
+    float4 weights = ControlMaps.SampleLevel(sampData, float3(uv2, 1), 0);
+	
     float3 normal = GetNormal(Height, uv);
-	float angle = dot(normal, float3(0, 1, 0));
+    float angle = dot(normal, float3(0, 1, 0));
 	//float slope = GetSteepness(Textures[3], uv);
 
-	float limit = 0.66f;
-	float grow = map(angle, limit, 1, 0, 1);
+    float limit = 0.66f;
+    float grow = map(angle, limit, 1, 0, 1);
 
-	grow = clamp(grow * 10, 0, 1);
+    grow = clamp(grow * 10, 0, 1);
 	//grow = grow * grow;
 
-	if (grow < 0.001f)
-		return;
+    if (grow < 0.001f)
+        return;
 
-	float2 diff = worldPosition.xz - CameraPosition.xz;
-	float distance = dot(diff, diff);
+    float2 diff = worldPosition.xz - CameraPosition.xz;
+    float distance = dot(diff, diff);
 
     float elevation = Height.SampleLevel(sampHeight, uv, 0).r;
     float l = map(elevation, 8.5f / MaxHeight, 10.5f / MaxHeight, 0, 1);
 
-	grow *= map(distance, Near, Far, 1, 0);
-	grow *= l;
+    grow *= map(distance, Near, Far, 1, 0);
+    grow *= l;
+    grow = saturate(weights.y);
+
+    if (grow < 0.3f)
+        return;
 	
-	if (grow > 0.1f)
-	{
-		GeoOutput v;
+    GeoOutput v;
 
-        worldPosition.y = elevation * MaxHeight - Offset.y;
+    worldPosition.y = elevation * MaxHeight - Offset.y;
 
-		float2 gridpos = float2(input.Size.z % 2, floor(input.Size.z * 0.5f));
-        float2 uv =  0.5f * gridpos;
-		//float4 viewPosition = mul(worldPosition, View);
-		//float4 pos = mul(viewPosition, Projection);
-        float4 pos = mul(worldPosition, ViewProjection);
+    float2 gridpos = float2(input.Size.z % 2, floor(input.Size.z * 0.5f));
+    uv = 0.5f * gridpos;
+	//float4 viewPosition = mul(worldPosition, View);
+	//float4 pos = mul(viewPosition, Projection);
+    float4 pos = mul(worldPosition, ViewProjection);
 
-		float width = vert[0].Size.x * grow;
-		float height = vert[0].Size.y * grow;
-        float halfwidth = width * 0.5f;
+    float width = input.Size.x * grow;
+    float height = input.Size.y * grow;
+    float halfwidth = width * 0.5f;
 
-		float sway = sin(pos.x + Time * 1.723) * sin(pos.x + Time * 3.6372)  * halfwidth * 0.125f;
-		float sway2 = cos(pos.z + Time * 2.129) * cos(pos.z + Time * 3.427) * halfwidth * 0.125f;
+    float sway = 0; // sin(pos.x + Time * 1.723) * sin(pos.x + Time * 3.6372)  * halfwidth * 0.125f;
+    float sway2 = 0; // cos(pos.z + Time * 2.129) * cos(pos.z + Time * 3.427) * halfwidth * 0.125f;
 
-		//normal.y = clamp(normal.y - sway, -1, 1);
+	//normal.y = clamp(normal.y - sway, -1, 1);
 
-		//--------------------------------------------
-		//quad
-		//bottom left
-		v.Position = pos + float4(-halfwidth, 0, 0, 0);
-		v.Depth = v.Position.z / v.Position.w;
-        v.UV = uv + float2(0, 1) * 0.5f;
-		v.Normal = normal;
-		v.Color = input.Color;
-		triStream.Append(v);
+	//--------------------------------------------
+	//quad
+	//bottom left
+    v.Position = pos + float4(-halfwidth, 0, 0, 0);
+    v.Depth = v.Position.z / v.Position.w;
+    v.UV = uv + float2(0, 1) * 0.5f;
+    v.Normal = normal;
+    v.Color = input.Color;
+    triStream.Append(v);
 
-		//top left
-		v.Position = pos + float4(-halfwidth + sway, height, sway2, sway2);
-		v.Depth = v.Position.z / v.Position.w;
-		v.UV = uv + float2(0, 0);
-		v.Normal = normal;
-		v.Color = input.Color;
-		triStream.Append(v);
+	//top left
+    v.Position = pos + float4(-halfwidth + sway, height, sway2, sway2);
+    v.Depth = v.Position.z / v.Position.w;
+    v.UV = uv + float2(0, 0);
+    v.Normal = normal;
+    v.Color = input.Color;
+    triStream.Append(v);
 
-		//bottom right
-		v.Position = pos + float4(halfwidth, 0, 0, 0);
-		v.Depth = v.Position.z / v.Position.w;
-        v.UV = uv + float2(1, 1) * 0.5f;
-		v.Normal = normal;
-		v.Color = input.Color;
-		triStream.Append(v);
+	//bottom right
+    v.Position = pos + float4(halfwidth, 0, 0, 0);
+    v.Depth = v.Position.z / v.Position.w;
+    v.UV = uv + float2(1, 1) * 0.5f;
+    v.Normal = normal;
+    v.Color = input.Color;
+    triStream.Append(v);
 
-		//top right
-		v.Position = pos + float4(halfwidth + sway, height, sway2, sway2);
-		v.Depth = v.Position.z / v.Position.w;
-        v.UV = uv + float2(1, 0) * 0.5f;
-		v.Normal = normal;
-		v.Color = input.Color;
-		triStream.Append(v);
-	}
+	//top right
+    v.Position = pos + float4(halfwidth + sway, height, sway2, sway2);
+    v.Depth = v.Position.z / v.Position.w;
+    v.UV = uv + float2(1, 0) * 0.5f;
+    v.Normal = normal;
+    v.Color = input.Color;
+    triStream.Append(v);
 }
 
 FragmentOutput PS(GeoOutput input)

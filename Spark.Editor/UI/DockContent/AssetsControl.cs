@@ -7,6 +7,7 @@ using Spark;
 using System.Reflection;
 using System.IO;
 using static Spark.Editor.MenuBuilder;
+using SharpDX.Direct3D11;
 
 namespace Spark.Editor
 {
@@ -105,6 +106,7 @@ namespace Spark.Editor
                 Foldout.Texture = childCOunt > 0 ? "nav_right.dds" : "";
                 Foldout.Texture = directory.Expanded ? "nav_down.dds" : Foldout.Texture;
                 Selected = SelectedNode?.Info.FullName == directory.Info.FullName;
+                if (Selected)Focus();
 
                 Label.Text = directory.Info.Name;
                 IndentFrame.Size = new Point(Indent * directory.Depth, IndentFrame.Size.y);
@@ -333,18 +335,30 @@ namespace Spark.Editor
 
             node.KeyDown += (s, e) =>
             {
-                //if (e.Key == Keys.RIGHTARROW) node.Expanded = true;
-                //if (e.Key == Keys.LEFTARROW) node.Expanded = false;
-                //if (e.Key == Keys.DOWNARROW)
-                //{
-                //    VirtualList.NextNode();
-                //    VirtualList.ScrollTo(VirtualList.SelectedNode);
-                //}
-                //if (e.Key == Keys.UPARROW)
-                //{
-                //    VirtualList.PreviousNode();
-                //    VirtualList.ScrollTo(VirtualList.SelectedNode);
-                //};
+                var dir = s.Tag as Directory;
+                var myIndex = directories.IndexOf(dir);
+
+                if (e.Key == Keys.RIGHTARROW && !dir.Expanded)
+                    Node_ExpandedChanged(myIndex, dir);
+
+                if (e.Key == Keys.LEFTARROW && dir.Expanded)
+                    Node_ExpandedChanged(myIndex, dir);
+                
+                if (e.Key == Keys.DOWNARROW)
+                {
+                    var nextIndex = Math.Min(myIndex + 1, directories.Count - 1);
+                    var nextDir = directories[nextIndex];
+                    SelectNode(nextDir);
+                    VirtualList.ScrollTo(nextIndex);
+                }
+
+                if (e.Key == Keys.UPARROW)
+                {
+                    var prev = Math.Max(myIndex - 1, 0);
+                    var nextDir = directories[prev];
+                    SelectNode(nextDir);
+                    VirtualList.ScrollTo(prev);
+                };
             };
 
             return node;
@@ -352,12 +366,15 @@ namespace Spark.Editor
 
         private void Node_MouseClick(Control sender, MouseEventArgs args)
         {
-            var node = sender as ExplorerNode;
-            var dir = node.Tag as Directory;
+            SelectNode(sender.Tag as Directory);
+        }
 
+
+        void SelectNode(Directory dir)
+        {
             ExplorerNode.SelectedNode = dir;
             VirtualList.Refresh();
-            
+
             flow.Controls.Clear();
             PopulateFromFolder(dir.Info);
             BuildBreadCrumb(dir.Info);

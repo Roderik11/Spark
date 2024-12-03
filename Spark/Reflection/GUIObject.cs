@@ -178,7 +178,6 @@ namespace Spark
                 list[elementIndex] = value;
             }
         }
-
     }
 
     public class GUIObject

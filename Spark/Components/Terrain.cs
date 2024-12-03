@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Windows.Forms;
 using SharpDX;
-using SharpDX.D3DCompiler;
 using SharpDX.Direct3D11;
-using static System.Net.Mime.MediaTypeNames;
 using Buffer = SharpDX.Direct3D11.Buffer;
 
 namespace Spark
@@ -109,20 +107,17 @@ namespace Spark
 
             public void Add(Matrix matrix, Vector4 rect, int level)
             {
-                array[drawCount] = new TerrainPatch { Transform = Matrix.Transpose(matrix), Rect = rect, Level = new Vector2(level, 0) };
+                array[drawCount] = new TerrainPatch
+                {
+                    Transform = Matrix.Transpose(matrix),
+                    Rect = rect,
+                    Level = new Vector2(level, 0)
+                };
+
                 drawCount++;
 
                 if (drawCount >= array.Length)
                     ResizeBuffers();
-            }
-
-            public void Flush()
-            {
-                if (drawCount == 0) return;
-
-                Engine.Device.ImmediateContext.MapSubresource(buffer, 0, MapMode.WriteDiscard, SharpDX.Direct3D11.MapFlags.None, out stream);
-                stream.WriteRange(array, 0, drawCount);
-                Engine.Device.ImmediateContext.UnmapSubresource(buffer, 0);
             }
 
             public void Clear()
@@ -130,18 +125,22 @@ namespace Spark
                 drawCount = 0;
             }
 
+            public void WriteInstanceBuffer()
+            {
+                if (drawCount == 0) return;
+                Engine.Device.ImmediateContext.MapSubresource(buffer, 0, MapMode.WriteDiscard, MapFlags.None, out stream);
+                stream.WriteRange(array, 0, drawCount);
+                Engine.Device.ImmediateContext.UnmapSubresource(buffer, 0);
+            }
+
             public void Draw(Effect effect)
             {
-                Flush();
-
                 if (drawCount == 0) return;
 
                 var assembler = Engine.Device.ImmediateContext.InputAssembler;
 
-                assembler.PrimitiveTopology = mesh.Topology;
                 assembler.SetVertexBuffers(0, mesh.Bindings);
                 assembler.SetIndexBuffer(mesh.IndexBuffer, SharpDX.DXGI.Format.R32_UInt, 0);
-                assembler.InputLayout = effect.GetInputLayout(mesh.InputElements);
 
                 effect.SetParameter("terrainData", instanceBufferView);
                 effect.Apply();
@@ -189,18 +188,13 @@ namespace Spark
         public float[,] HeightField { get; set; }
         //public RenderTexture2D NormalMap { get; private set; }
 
-        private Texture ControlMaps;
+        public Texture ControlMaps;
         private Texture DiffuseMaps;
         private Texture NormalMaps;
         private Vector2[] LayerTiling = new Vector2[32];
 
         protected override void Awake()
         {
-            // TODO SPLATTING
-            // splat mask = RGBA = one layer per channel
-            // material mask = RGBA = one layer per channel
-            // texture array
-
             var extent = TerrainSize / 2;
             quadtree = new QuadTreeNode(Transform.Position + new Vector3(extent.X, 0, extent.Y), new Vector3(extent.X, MaxHeight * 10, extent.Y));
             sizeFactor = quadtree.Extents.X / patchSize;
@@ -215,6 +209,12 @@ namespace Spark
             patches.Add(PatchType.SW, Mesh.PatchSW());
             patches.Add(PatchType.SE, Mesh.PatchSE());
 
+            foreach (var kp in patches)
+            {
+                kp.Value.UV = null;
+                kp.Value.Normals = null;
+            }
+
             //NormalMap = new RenderTexture2D(Heightmap.Description.Width, Heightmap.Description.Height, SharpDX.DXGI.Format.R16G16B16A16_SNorm, false);
 
             //createNormalsEffect = new Effect("createNormals");
@@ -228,6 +228,50 @@ namespace Spark
             CreateControlMaps();
             CreateTextureArrays();
         }
+
+        private VertexBufferBinding CreateVertexBuffer2()
+        {
+            int num = 33;
+            int count = num * num;
+            float offset = (float)(num - 1) / 2;
+
+            var verts = new short[count];
+
+            for (int z = 0; z < num; z++)
+            {
+                for (int x = 0; x < num; x++)
+                {
+                    int index = z * num + x;
+                    verts[index] = (short)((x & 0x3F) | ((z & 0x3F) << 6));
+                }
+            }
+
+            var buffer = Geometry.CreateVertexBuffer(verts);
+
+            return new VertexBufferBinding(buffer, buffer.Description.StructureByteStride, 0);
+        }
+
+        private void CreateVertexBuffer(out Buffer buffer, out VertexBufferBinding binding)
+        {
+            int num = 33;
+            int count = num * num;
+            float offset = (float)(num - 1) / 2;
+
+            var verts = new Vector3[count];
+
+            for (int z = 0; z < num; z++)
+            {
+                for (int x = 0; x < num; x++)
+                {
+                    int index = z * num + x;
+                    verts[index] = new Vector3(x - offset, 0, z - offset);
+                }
+            }
+
+            buffer = Geometry.CreateVertexBuffer(verts);
+            binding = new VertexBufferBinding(buffer, Utilities.SizeOf<Vector3>(), 0);
+        }
+
 
         private void CreateControlMaps()
         {
@@ -260,30 +304,16 @@ namespace Spark
                 var layer = Layers[i];
                 diffuse.Add(layer.Diffuse);
                 normals.Add(layer.Normals);
-                tiling.Add(layer.Tiling);
+                tiling.Add(TerrainSize / layer.Tiling);
             }
 
             LayerTiling = tiling.ToArray();
             DiffuseMaps = Graphics.CreateTexture2DArray(1024, 1024, diffuse);
             NormalMaps = Graphics.CreateTexture2DArray(1024, 1024, normals);
 
-            //Material.Effect.SetValue("Data", tex3);
             Material.Effect.SetValue("LayerTiling", LayerTiling);
             Material.Effect.SetValue("DiffuseMaps", DiffuseMaps);
             Material.Effect.SetValue("NormalMaps", NormalMaps);
-            //Material.Effect.SetValue("Splatmap", mergedSplatmap);
-            //Material.Effect.SetValue("Indexmap", indexMap);
-            Material.Effect.SetValue("sampIndex", Samplers.ClampedPoint);
-
-        }
-
-        public void Update()
-        {
-            Material.Effect.RasterizerState = Wireframe ? States.Wireframe : States.BackCull;
-            
-            Profiler.Start("Terrain Quadtree");
-            quadtree.Update(Camera.Main.WorldPosition);
-            Profiler.Stop();
         }
 
         public float GetHeight(Vector3 position)
@@ -334,6 +364,15 @@ namespace Spark
             //}
 
             //return height;
+        }
+
+        public void Update()
+        {
+            Material.Effect.RasterizerState = Wireframe ? States.Wireframe : States.BackCull;
+
+            Profiler.Start("Terrain Quadtree");
+            quadtree.Update(Camera.Main.WorldPosition);
+            Profiler.Stop();
         }
 
         public void Draw()
@@ -389,32 +428,37 @@ namespace Spark
             rect.Z = (node.Bounds.Maximum.X - Transform.Position.X) / (quadtree.Extents.X * 2);
             rect.W = (node.Bounds.Minimum.Z - Transform.Position.Z) / (quadtree.Extents.Z * 2);
 
-            if (!buckets.ContainsKey(payload.Type))
-                buckets.Add(payload.Type, new Bucket(patches[payload.Type]));
+            if(!buckets.TryGetValue(payload.Type, out var bucket))
+            {
+                bucket = new Bucket(patches[payload.Type]);
+                buckets.Add(payload.Type, bucket);
+            }
 
-            buckets[payload.Type].Add(m * Transform.Matrix, rect, QuadTreeNode.MaxDepth - (node.Depth + 1));
+            bucket.Add(m * Transform.Matrix, rect, QuadTreeNode.MaxDepth - (node.Depth + 1));
         }      
 
         void DrawInstanced()
         {
             Profiler.Start("Terrain Draw Instanced");
+
+            var campos = Camera.Main.WorldPosition;
+            campos.Y = 0;
+
             var effect = Material.Effect;
-
-            //Engine.Device.ImmediateContext.InputAssembler.InputLayout = effect.GetInputLayout(VertexComplex.InputElements);
-            //Engine.Device.ImmediateContext.InputAssembler.PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
-
-            var pos = Camera.Main.WorldPosition;
-            pos.Y = 0;
-
-            effect.SetParameter("Height", Heightmap);
-            effect.SetParameter("sampHeightFilter", Samplers.ClampedBilinear2D);
-            effect.SetParameter("sampHeight", Samplers.ClampedPoint2D);
             effect.SetParameter("sampData", Samplers.WrappedAnisotropic);
+            effect.SetParameter("sampHeight", Samplers.ClampedPoint2D);
+            effect.SetParameter("sampHeightFilter", Samplers.ClampedBilinear2D);
+            effect.SetParameter("Height", Heightmap);
             effect.SetParameter("MaxHeight", MaxHeight);
-            effect.SetParameter("CameraPos", pos);
-            effect.SetParameter("Tiling", Vector2.One * 16);
-            effect.SetParameter("World", Transform.Matrix);
             effect.SetParameter("HeightTexel", 1f / Heightmap.Description.Width);
+            effect.SetParameter("CameraPos", campos);
+
+            foreach (var pair in buckets)
+                pair.Value.WriteInstanceBuffer();
+
+            var assembler = Engine.Device.ImmediateContext.InputAssembler;
+            assembler.PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
+            assembler.InputLayout = effect.GetInputLayout(VertexPosition.InputElements);
 
             foreach (var pair in buckets)
                 pair.Value.Draw(effect);

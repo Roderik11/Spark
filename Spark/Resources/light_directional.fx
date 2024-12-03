@@ -45,6 +45,7 @@ float readShadowMap(float4 worldPos, float wdepth)
     float d = length(worldPos);
     //float d = linearize_depth(wdepth, 0.1f, 104096);
     //float d = lineardepth(wdepth);
+    //float d = LinearizeDepth(wdepth, 0.1f, 104096);
 	
     for (int i = 0; i < 4; i++)
     {
@@ -54,6 +55,7 @@ float readShadowMap(float4 worldPos, float wdepth)
             break;
         }
     }
+	
     if (sliceIndex > 3)
         return 1;
 	

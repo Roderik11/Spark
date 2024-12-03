@@ -42,7 +42,7 @@ struct FragmentOutput
 {
     float4 Albedo : SV_TARGET0;
 	//float4 Normals		: SV_TARGET1;
-	//float3 Depth		: SV_TARGET2;
+	//float3 Depth		    : SV_TARGET2;
 	//float4 Data			: SV_TARGET3;
 };
 

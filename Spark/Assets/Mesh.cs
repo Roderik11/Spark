@@ -185,7 +185,7 @@ namespace Spark
             var buffer = binding.Buffer;
             Disposer.SafeDispose(ref buffer);
             binding.Buffer = array != null ? Geometry.CreateVertexBuffer(array) : null;
-            binding.Stride = Utilities.SizeOf<T>();
+            binding.Stride = array != null ? Utilities.SizeOf<T>() : 0;
         }
 
         public void Dispose()

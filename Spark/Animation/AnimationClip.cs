@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SharpDX;
 using System.Collections.ObjectModel;
+using SharpDX.WIC;
 
 namespace Spark
 {
@@ -12,6 +13,8 @@ namespace Spark
 
         public readonly ReadOnlyCollection<AnimationChannel> Channels;
         private List<AnimationChannel> _channels = new List<AnimationChannel>();
+
+        public Dictionary<string, float> boneLength = new Dictionary<string, float>();
 
         public float Duration
         {

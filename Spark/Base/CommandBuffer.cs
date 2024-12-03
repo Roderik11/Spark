@@ -25,6 +25,8 @@ namespace Spark
         private readonly Dictionary<RenderPass, Pass> Passes = new Dictionary<RenderPass, Pass>();
         private static readonly Stack<CommandBuffer> freeBuffers = new Stack<CommandBuffer>();
 
+        private static readonly ConcurrentDictionary<BatchKey, InstanceBatch> batchesConc = new ConcurrentDictionary<BatchKey, InstanceBatch>();
+
         class DrawCallList : ConcurrentStack<DrawCall>
         {
 
@@ -114,6 +116,7 @@ namespace Spark
                 this.mesh = mesh;
                 this.meshPart = mesh.MeshParts[meshPart];
                 this.material = material;
+
                 int stride = Utilities.SizeOf<Matrix>();
                 matrixArray = new Matrix[32];
                 drawCalls = new DrawCall[drawCallArrayLength];
@@ -182,7 +185,7 @@ namespace Spark
                 }
             }
 
-            internal void FillBuffers()
+            internal void FillArrays()
             {
                 if (drawCount >= matrixArray.Length)
                     ResizeMatrixBuffer(drawCount);
@@ -199,7 +202,7 @@ namespace Spark
                 Array.Sort(drawCalls, 0, drawCount, DrawCallComparer.Instance);
             }
 
-            internal void PushBuffers()
+            internal void WriteBuffers()
             {
                 if (drawCount == 0) return;
 
@@ -237,6 +240,8 @@ namespace Spark
                 IncrementDrawInstanced(renderPass, 1);
                 IncrementInstances(renderPass, drawCount);
 
+            //    ref var args = ref argsBuffer[0];
+
                 //argsBuffer[0] = new DrawArgs
                 //{
                 //    IndexCountPerInstance = (uint)meshPart.NumIndices,
@@ -246,9 +251,8 @@ namespace Spark
                 //    StartInstanceLocation = 0,
                 //};
 
-                // Engine.Device.ImmediateContext.DrawIndexedInstancedIndirect(argsBuffer.Buffer, 0);
-
                 if (mesh.IndexBuffer != null)
+                //    context.DrawIndexedInstancedIndirect(argsBuffer.Buffer, 0);
                     context.DrawIndexedInstanced(meshPart.NumIndices, drawCount, meshPart.BaseIndex, meshPart.BaseVertex, 0);
                 else
                     context.DrawInstanced(meshPart.NumIndices, drawCount, meshPart.BaseVertex, 0);
@@ -434,7 +438,6 @@ namespace Spark
 
             Profiler.Start("Create Batches");
 
-          //  long hash = 0;
             BatchKey key = new BatchKey();
             InstanceBatch batch = null;
             foreach (var drawCall in p.InstancedCalls)
@@ -468,17 +471,15 @@ namespace Spark
             }
 
             Profiler.Start("Fill Batches");
-            batchlist.For(b => b.FillBuffers(), true);
+            batchlist.For(b => b.FillArrays(), true);
             Profiler.Stop();
 
             Profiler.Start("Push Buffers");
-            batchlist.For(b => b.PushBuffers());
+            batchlist.For(b => b.WriteBuffers());
             Profiler.Stop();
 
             Profiler.Start("Draw Batches");
-
             batchlist.For(b => b.Draw(pass));
-
             Profiler.Stop();
 
             Profiler.Start("Draw Callbacks");

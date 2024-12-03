@@ -24,7 +24,7 @@ namespace Spark
         public Entity Entity { get; internal set; }
 
         [Browsable(false)]
-        public Transform Transform { get { return Entity != null ? Entity.Transform : null; } }
+        public Transform Transform => Entity?.Transform;
 
         internal void WakeUp()
         {

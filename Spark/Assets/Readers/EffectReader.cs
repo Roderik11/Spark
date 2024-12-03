@@ -4,7 +4,7 @@ using SharpDX.DXGI;
 
 namespace Spark
 {
-    [AssetImporter(".fx")]
+    [AssetReader(".fx")]
     public class EffectReader : AssetReader<Effect>
     {
         public override Effect Import(string filename)

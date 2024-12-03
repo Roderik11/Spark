@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Assimp;
 using SharpDX;
-using System.Xml;
 
 namespace Spark
 {
-    [AssetImporter(".smesh")]
+    [AssetReader(".smesh")]
     public class MeshPackReader : AssetReader<Mesh>
     {
         public override Mesh Import(string filename)
@@ -22,7 +20,7 @@ namespace Spark
         }
     }
 
-    [AssetImporter(".obj")]
+    [AssetReader(".obj")]
     public class OBJReader : AssetReader<Mesh>
     {
         public float Scale = 1;
@@ -202,7 +200,7 @@ namespace Spark
         }
     }
 
-    [AssetImporter(".x", ".dae", ".fbx")]
+    [AssetReader(".x", ".dae", ".fbx")]
     public class AssimpReader : AssetReader<Mesh>
     {
         public bool ConvertUnits = true;

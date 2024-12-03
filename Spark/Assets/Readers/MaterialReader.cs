@@ -4,7 +4,7 @@ using SharpDX.DXGI;
 
 namespace Spark
 {
-    [AssetImporter(".mat")]
+    [AssetReader(".mat")]
     public class MaterialReader : AssetReader<Material>
     {
         public override Material Import(string filename)

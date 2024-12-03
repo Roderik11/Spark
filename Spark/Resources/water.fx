@@ -46,6 +46,40 @@ struct VertexOutput
 	float3 vLight		: TEXCOORD2;
 };
 
+float3 GerstnerWave(float4 wave, float3 p, inout float3 tangent, inout float3 binormal)
+{
+    float steepness = wave.z;
+    float wavelength = wave.w;
+    float k = 2 * 3.141592f / wavelength;
+    float c = sqrt(9.8 / k);
+    float2 d = normalize(wave.xy);
+    float f = k * (dot(d, p.xz) - c * Time);
+    float a = steepness / k;
+
+	//p.x += d.x * (a * cos(f));
+	//p.y = a * sin(f);
+	//p.z += d.y * (a * cos(f));
+
+	//float steepnessSinF = steepness * sin(f);
+	//float steepnessCosF = steepness * cos(f);
+	//float aCosF = a * cos(f);
+
+    tangent += float3(
+		-d.x * d.x * (steepness * sin(f)),
+		d.x * (steepness * cos(f)),
+		-d.x * d.y * (steepness * sin(f))
+		);
+    binormal += float3(
+		-d.x * d.y * (steepness * sin(f)),
+		d.y * (steepness * cos(f)),
+		-d.y * d.y * (steepness * sin(f))
+		);
+    return float3(
+		d.x * (a * cos(f)),
+		a * sin(f),
+		d.y * (a * cos(f))
+		);
+}
 
 bool IntersectRayPlane(float3 rayOrigin, float3 rayDirection, float3 posOnPlane, float3 planeNormal, out float3 intersectionPoint)
 {

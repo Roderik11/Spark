@@ -83,6 +83,26 @@ namespace Spark
             for (int i = 0; i < count; i++)
                 BlendBone(skeleton[i], ref tempPose, out bones[i]);
 
+            // retargeting
+            //for (int i = 0; i < count; i++)
+            //{
+            //    var bone = skeleton[i];
+
+            //    //var sourceBoneLength = bones[i].TranslationVector.Length();
+            //    //var myBoneLength = bone.BindPose.Position.Length();
+
+            //    if (skeleton[i].Parent > -1)
+            //    {
+            //        var sourceBoneLength = Vector3.Distance(bones[i].TranslationVector, bones[bone.Parent].TranslationVector);
+            //        var myBoneLength = Vector3.Distance(bone.BindPose.Position, skeleton[bone.Parent].BindPose.Position);
+
+            //        var ratio = myBoneLength / sourceBoneLength;
+            //        var b = bones[i];
+            //        b.TranslationVector = Vector3.Multiply(b.TranslationVector, ratio);
+            //        bones[i] = b;
+            //    }
+            //}
+
             // apply custom bone transforms
             if (OnBoneTransform != null)
             {
@@ -100,6 +120,7 @@ namespace Spark
             // apply bone offset matrix
             for (int i = 0; i < count; i++)
                 Matrix.Multiply(ref skeleton[i].OffsetMatrix, ref bones[i], out bones[i]);
+
         }
 
         /// <summary>
@@ -148,7 +169,7 @@ namespace Spark
         {
             Bone bone;
             int count = skeleton.Length;
-         
+
             // blend poses
             System.Threading.Tasks.Parallel.For(0, count, (i) =>
             {
@@ -210,6 +231,6 @@ namespace Spark
             Matrix.Translation(ref blendPose.Position, out mat2);
             Matrix.Multiply(ref mat1, ref mat2, out matrix);
         }
-
+    
     }
 }

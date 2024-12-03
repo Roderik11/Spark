@@ -1,9 +1,69 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using SharpDX.Direct3D11;
+using System.IO;
+using System.Threading.Tasks;
 using Spark;
 
 namespace Spark.Client
 {
+    public class Thumbnail
+    {
+        public readonly string filename;
+        public Texture texture;
+        public bool Finished;
+
+        public event Action OnFinishedLoading;
+
+        public Action<Thumbnail> CreateThumbnail;
+
+        public Thumbnail(string filename)
+        {
+            this.filename = filename;
+        }
+
+        public void Load()
+        {
+            var assetType = AssetManager.GetAssetType(filename);
+
+            if (assetType == typeof(Texture))
+                Task.Factory.StartNew(() => LoadTextureAsync());
+            else if (assetType == typeof(Mesh))
+                CreateThumbnail(this);
+            else
+                Finished = true;
+        }
+
+        private void LoadTextureAsync()
+        {
+            texture = CreateTextureThumbnail(filename);
+            Finished = true;
+            OnFinishedLoading?.Invoke();
+        }
+
+        private Texture CreateTextureThumbnail(string filename)
+        {
+            Texture texture = null;
+
+            try
+            {
+                if (!Path.IsPathRooted(filename))
+                    filename = Path.Combine(AssetDatabase.Assets.FullName, filename);
+
+                Texture2D resource = Texture.FromFile(Engine.Device, filename);
+
+                texture = new Texture
+                {
+                    Resource = resource,
+                };
+            }
+            catch { }
+
+            return texture;
+        }
+    }
     public class ProjectWindow : EditorWindow
+
     {
         private List<AssetInfo> Files = new List<AssetInfo>();
         private Dictionary<string, Thumbnail> thumbnails = new Dictionary<string, Thumbnail>();

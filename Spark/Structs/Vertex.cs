@@ -29,6 +29,14 @@ namespace Spark
         };
     }
 
+    public struct VertexPosition
+    {
+        public static InputElement[] InputElements = new InputElement[]
+        {
+            new InputElement("POSITION", 0, Format.R32G32B32_Float, 0, 0, InputClassification.PerVertexData, 0),
+        };
+    }
+
     public struct VertexColorUV
     {
         public Vector3 Position;

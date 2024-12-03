@@ -166,6 +166,7 @@ namespace Spark
                 pair.Value.SetParameter("ViewInverse", viewInv);
                 pair.Value.SetParameter("Projection", proj);
                 pair.Value.SetParameter("ProjectionInverse", projInv);
+                pair.Value.SetParameter("ViewProjection", view * proj);
                 pair.Value.SetParameter("Time", time);
                 pair.Value.SetParameter("LogZ", logz);
             }

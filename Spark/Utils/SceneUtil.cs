@@ -885,6 +885,7 @@ namespace Spark
             Texture normal = content.Load<Texture>("Characters/Knight/textures/Knight_normal.png");
             Texture specular = content.Load<Texture>("DefaultSpecularMap.dds");
             Texture diffuse = content.Load<Texture>("Characters/Knight/textures/Knight_diffuse.png");
+
             Texture aoc = content.Load<Texture>("white.dds");
             //normal = content.Load<Texture>("DefaultNormalMap.dds");
             //specular = content.Load<Texture>("Characters/Knight/textures/Knight_specular.png");

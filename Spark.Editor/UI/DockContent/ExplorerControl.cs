@@ -7,6 +7,7 @@ using Spark;
 using System.Reflection;
 using System.IO;
 using System.Security.Permissions;
+using Spark.Graph;
 
 namespace Spark.Editor
 {
@@ -168,6 +169,7 @@ namespace Spark.Editor
             {
                 Entity = entity;
                 NodeIndex = index;
+                Tag = entity;
 
                 int childCOunt = entity.Transform.GetChildCount();
 
@@ -181,6 +183,7 @@ namespace Spark.Editor
                 IndentFrame.Size = new Point(Indent * entity.Transform.Depth, IndentFrame.Size.y);
                 Label1.Size = new Point((200 - 27) - Indent * entity.Transform.Depth, Label1.Size.y);
                 Label2.Text = string.Empty;
+                if (Selected) Focus();
 
                 Component lastComponent = null;
                 foreach (var comp in entity.GetComponents())
@@ -319,7 +322,7 @@ namespace Spark.Editor
             int childindex = entities.IndexOf(child);
 
             VirtualList.Refresh();
-            VirtualList.UpdateVirtualList();
+            //VirtualList.UpdateVirtualList();
             VirtualList.ScrollTo(childindex);
         }
 
@@ -372,7 +375,7 @@ namespace Spark.Editor
 
             VirtualList.DataSource = bindList;
             VirtualList.Refresh();
-            VirtualList.UpdateVirtualList();
+            //VirtualList.UpdateVirtualList();
         }
 
         void FindExpandedChildren(Entity entity, List<Entity> result)
@@ -409,18 +412,30 @@ namespace Spark.Editor
 
             node.KeyDown += (s, e) =>
             {
-                //if (e.Key == Keys.RIGHTARROW) node.Expanded = true;
-                //if (e.Key == Keys.LEFTARROW) node.Expanded = false;
-                //if (e.Key == Keys.DOWNARROW)
-                //{
-                //    VirtualList.NextNode();
-                //    VirtualList.ScrollTo(VirtualList.SelectedNode);
-                //}
-                //if (e.Key == Keys.UPARROW)
-                //{
-                //    VirtualList.PreviousNode();
-                //    VirtualList.ScrollTo(VirtualList.SelectedNode);
-                //};
+                var myEntity = (s as ExplorerNode).Entity;
+                var myIndex = bindList.IndexOf(myEntity);
+
+                if (e.Key == Keys.RIGHTARROW && !myEntity.Expanded)
+                    Node_ExpandedChanged(myIndex, myEntity);
+
+                if (e.Key == Keys.LEFTARROW && myEntity.Expanded)
+                    Node_ExpandedChanged(myIndex, myEntity);
+
+                if (e.Key == Keys.DOWNARROW)
+                {
+                    var nextIndex = Math.Min(myIndex + 1, bindList.Count - 1);
+                    var nextDir = bindList[nextIndex];
+                    Select(nextDir);
+                    VirtualList.ScrollTo(nextIndex);
+                }
+
+                if (e.Key == Keys.UPARROW)
+                {
+                    var prev = Math.Max(myIndex - 1, 0);
+                    var nextDir = bindList[prev];
+                    Select(nextDir);
+                    VirtualList.ScrollTo(prev);
+                };
             };
 
             return node;
@@ -428,9 +443,14 @@ namespace Spark.Editor
 
         private void Node_MouseClick(Control sender, MouseEventArgs args)
         {
-            selectionSender = true;
             var node = sender as ExplorerNode;
-            Selector.SelectedEntity = node.Entity;
+            Select(node.Entity);
+        }
+
+        void Select(Entity entity)
+        {
+            selectionSender = true;
+            Selector.SelectedEntity = entity;
             selectionSender = false;
             VirtualList.Refresh();
         }
@@ -448,7 +468,7 @@ namespace Spark.Editor
                 entities.RemoveRange(index + 1, list.Count);
 
             VirtualList.Refresh();
-            VirtualList.UpdateVirtualList();
+            //VirtualList.UpdateVirtualList();
         }
 
         private void Node_MouseDoubleClick(Control sender, MouseEventArgs args)

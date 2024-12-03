@@ -6,70 +6,10 @@ using System.Threading.Tasks;
 using SharpDX;
 using System.IO;
 using SharpDX.Direct3D11;
-using System.Collections;
-using System.Runtime.InteropServices.ComTypes;
 using System.Diagnostics;
-using System.Net;
-using Spark.Graph;
 
 namespace Spark
 {
-    public class Thumbnail
-    {
-        public readonly string filename;
-        public Texture texture;
-        public bool Finished;
-
-        public event Action OnFinishedLoading;
-
-        public Action<Thumbnail> CreateThumbnail;
-
-        public Thumbnail(string filename)
-        {
-            this.filename = filename;
-        }
-
-        public void Load()
-        {
-            var assetType = AssetManager.GetAssetType(filename);
-
-            if (assetType == typeof(Texture))
-                Task.Factory.StartNew(() => LoadTextureAsync());
-            else if (assetType == typeof(Mesh))
-                CreateThumbnail(this);
-            else
-                Finished = true;
-        }
-
-        private void LoadTextureAsync()
-        {
-            texture = CreateTextureThumbnail(filename);
-            Finished = true;
-            OnFinishedLoading?.Invoke();
-        }
-
-        private Texture CreateTextureThumbnail(string filename)
-        {
-            Texture texture = null;
-            
-            try
-            {
-                if (!Path.IsPathRooted(filename))
-                    filename = Path.Combine(AssetDatabase.Assets.FullName, filename);
-
-                Texture2D resource = Texture.FromFile(Engine.Device, filename);
-
-                texture = new Texture
-                {
-                    Resource = resource,
-                };
-            }
-            catch { }
-
-            return texture;
-        }
-    }
-
     public static class AssetDatabase
     {
         public static DirectoryInfo Assets;
@@ -181,7 +121,6 @@ namespace Spark
                 var noExtension = Path.GetFileNameWithoutExtension(relativePath);
                 var metaData = pathToMeta[toLower];
                 var assetType = AssetManager.GetAssetType(relativePath);
-                bool finished = false;
                 MeshPacker meshPacker = new MeshPacker();
 
                 if (importedHash.TryGetValue(metaData.Guid, out var importedFile))
@@ -201,28 +140,42 @@ namespace Spark
                     }
 
                     // if pow2 then dxt5 else what format?
-                    var info = new ProcessStartInfo("CMD.exe");
-                    info.Arguments = $"/C texconv -f DXT5 -r \"{file.FullName}\" -pow2 -o {Packaged}";
-                    //info.CreateNoWindow = true;
-                    //info.UseShellExecute = false;
-                 
+                    var info = new ProcessStartInfo("CMD.exe")
+                    {
+                        Arguments = $"/C texconv -y -f DXT5 -r \"{file.FullName}\" -o {Packaged}",
+                        CreateNoWindow = true,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true
+                    };
+
                     var process = new Process();
                     process.EnableRaisingEvents = true;
-                    process.StartInfo = info;
-                    process.Exited += (a, b) =>
+                    process.OutputDataReceived += (sender, args) =>
                     {
-                        finished = true;
+                        Debug.Log(args.Data);
                     };
+
+                    process.ErrorDataReceived += (sender, args) =>
+                    {
+                        Debug.Log(args.Data);
+                    };
+
+                    process.StartInfo = info;
                     process.Start();
-                
-                    while (!finished) { }
+
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+                    process.WaitForExit();
 
                     var clearName = Path.Combine(Packaged.FullName, noExtension + ".dds");
                     var guidName = Path.Combine(Packaged.FullName, metaData.Guid + ".dds");
+
                     if(File.Exists(guidName))
                         File.Delete(guidName);
 
-                    File.Move(clearName, guidName);
+                    if (File.Exists(clearName))
+                        File.Move(clearName, guidName);
                 }
 
                 if (assetType == typeof(Mesh))
@@ -289,7 +242,7 @@ namespace Spark
                 Texture thumbnailTexture = null;
 
                 if (assetType == typeof(Texture))
-                    thumbnailTexture = CreateTextureThumbnail(relativePath);
+                    thumbnailTexture = Engine.Assets.Load<Texture>(relativePath);
 
                 if (assetType == typeof(Mesh))
                     thumbnailTexture = factory.CreateThumbnail(relativePath);
@@ -386,11 +339,6 @@ namespace Spark
 
             return new DirectoryInfo(dir);
         }
-
-        private static Texture CreateTextureThumbnail(string file)
-        {
-            return Engine.Assets.Load<Texture>(file);
-        }
     }
 
     public class ThumbnailFactory : IDisposable
@@ -401,16 +349,17 @@ namespace Spark
 
         public ThumbnailFactory(int size = 128)
         {
-            var shader = new Effect("mesh_forward");
-            material = new Material(shader);
+            contentManager = new AssetManager(Engine.Device);
+            contentManager.BaseDirectory = Engine.ResourceDirectory;
 
-            var texture = Engine.Assets.Load<Texture>("checker_grey.dds");
+            var texture = contentManager.Load<Texture>("checker_grey.dds");
+
+            material = new Material(new Effect("mesh_forward"));
             material.SetParameter("Albedo", texture);
             material.SetParameter("linearSampler", Samplers.WrappedAnisotropic);
 
             viewport = new RenderView(size, size);
-            contentManager = new AssetManager(Engine.Device);
-            contentManager.BaseDirectory = Engine.ResourceDirectory;
+            viewport.Enabled = false;
         }
 
         public Texture CreateThumbnail(string path)

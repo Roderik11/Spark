@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 
 namespace Spark
 {
-    public class AssetImporterAttribute : Attribute
+    public class AssetReaderAttribute : Attribute
     {
         public string[] Formats;
 
-        public AssetImporterAttribute(params string[] formats)
+        public AssetReaderAttribute(params string[] formats)
         {
             Formats = formats;
         }
@@ -26,6 +27,31 @@ namespace Spark
         public virtual T Import(string filename)
         {
             return default;
+        }
+    }
+
+    public class AssetImporterAttribute : Attribute
+    {
+        public string[] Formats;
+
+        public AssetImporterAttribute(params string[] formats)
+        {
+            Formats = formats;
+        }
+    }
+
+    [Serializable]
+    public abstract class AssetImporter
+    {
+        [Browsable(false)]
+        public string Filepath;
+    }
+
+    [Serializable]
+    public class AssetImporter<T> : AssetImporter where T : IAsset
+    {
+        public virtual void Import(FileInfo file, DirectoryInfo destination)
+        {
         }
     }
 }

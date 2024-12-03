@@ -16,6 +16,7 @@ namespace Spark
 
         private static OutputMergerStage outputMerger;
         private static RasterizerStage rasterizer;
+        private static InputAssemblerStage inputAssembler;
         private static DeviceContext deviceContext;
 
         private static class Quad
@@ -65,6 +66,7 @@ namespace Spark
             deviceContext = Engine.Device.ImmediateContext;
             outputMerger = deviceContext.OutputMerger;
             rasterizer = deviceContext.Rasterizer;
+            inputAssembler = deviceContext.InputAssembler;
         }
 
         public static void DrawFullscreenQuad(Effect effect = null)
@@ -193,6 +195,10 @@ namespace Spark
             rasterizer.SetScissorRectangle(left, top, right, bottom);
 
         public static void SetRasterizerState(RasterizerState state) => rasterizer.State = state;
+
+        public static void SetLayoutInput(InputLayout layout) => inputAssembler.InputLayout = layout;
+
+        public static void SetTopology(PrimitiveTopology topology) => inputAssembler.PrimitiveTopology = topology;
 
     }
 }

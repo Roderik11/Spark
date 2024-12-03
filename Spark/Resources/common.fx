@@ -63,6 +63,12 @@ float view_depth(in float2 uv, in float depth, in float4x4 projInverse)
     return wpos.z;
 }
 
+float LinearizeDepth(float depth, in float near, in float far)
+{
+    float z = depth * 2.0 - 1.0; // back to NDC 
+    return (2.0 * near * far) / (far + near - z * (far - near));
+}
+
 float linearize_depth(in float d, in float zNear, in float zFar)
 {
     return zNear * zFar / (zFar + d * (zNear - zFar));
@@ -75,7 +81,7 @@ float lineardepth(in float d, in float4x4 proj)
 
 float3 blend_linear(in float3 n1, in float3 n2)
 {
-	float3 r = (n1 + n2) / 2;// * 2 - 2;
+	float3 r = (n1 + n2) * 0.5f;
 	return normalize(r);
 }
 

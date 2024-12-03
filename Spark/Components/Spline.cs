@@ -18,7 +18,7 @@ namespace Spark
         {
             Color = new Color3(1, 1, 1);
             Mesh = Mesh.CreateSphere(1, 8, 8);
-            Material = new Material(new Effect("light_point"));
+            Material = new Material(new Effect("mesh_unlit"));
             Material.Effect.BlendState = States.BlendAddColorOverwriteAlpha;
             Material.Effect.DepthStencilState = States.ZReadNoZWriteNoStencil;
         }
@@ -35,7 +35,7 @@ namespace Spark
             if (Mesh == null) return;
 
             Params.SetParameter("World", Transform.Matrix);
-            Params.SetParameter("LightColor", Color.ToVector3());
+            Params.SetParameter("Color", Color.ToVector3());
             Mesh.Render(Material, Params);
         }
     }

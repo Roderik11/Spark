@@ -87,10 +87,10 @@ namespace Spark
             foreach (Type type in types)
             {
                 // importers
-                var attributes = Attribute.GetCustomAttributes(type, typeof(AssetImporterAttribute));
+                var attributes = Attribute.GetCustomAttributes(type, typeof(AssetReaderAttribute));
                 if (attributes.Length > 0)
                 {
-                    AssetImporterAttribute attribute = (AssetImporterAttribute)attributes[0];
+                    AssetReaderAttribute attribute = (AssetReaderAttribute)attributes[0];
                     MethodInfo method = type.GetMethod("Import");
 
                     if (!Importers.TryGetValue(method.ReturnType, out var importerTable))

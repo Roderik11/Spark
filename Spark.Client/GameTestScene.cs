@@ -239,15 +239,15 @@ namespace Spark.Client
             var decMaterial = new Material(decEffect);
             decMaterial.UseInstancing = true;
 
-            //var decorator = new Entity("Decorator");
-            //decorator.Transform.Parent = terrain.Transform;
-            //var dec = decorator.AddComponent<TerrainDecorator>();
-            //dec.Terrain = terrain.GetComponent<Terrain>();
-            //dec.RandomColor = new Vector2(.6f, .8f);
-            //dec.BaseSize = new Vector2(.25f, .4f) * 1.5f;
-            //dec.RandomSize = new Vector2(1f, 2f);
-            //dec.Material = decMaterial;
-            //dec.CountPerCell *= 5;
+            var decorator = new Entity("Decorator");
+            decorator.Transform.Parent = terrain.Transform;
+            var dec = decorator.AddComponent<TerrainDecorator>();
+            dec.Terrain = terrain.GetComponent<Terrain>();
+            dec.RandomColor = new Vector2(.3f, .5f);
+            dec.BaseSize = new Vector2(.25f, .4f) * 1.5f;
+            dec.RandomSize = new Vector2(1f, 2f);
+            dec.Material = decMaterial;
+            dec.CountPerCell *= 5;
 
             var pos = new Vector3(1167, 64, 830);
            // var pos = new Vector3(999, 100, 775);
@@ -270,8 +270,7 @@ namespace Spark.Client
 
             var loader = new SceneLoader();
             loader.Load(@"D:\Dump\ExportedScene.json");
-
-            return;
+            //Engine.Settings.GlobalWater = false;
         }
     }
 

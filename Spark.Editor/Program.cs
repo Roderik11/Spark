@@ -23,9 +23,6 @@ namespace Spark.Editor
         static void Main()
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
             var color = System.Drawing.ColorTranslator.FromHtml("#222222");
 
             Form = new SharpDX.Windows.RenderForm
